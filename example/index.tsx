@@ -8,7 +8,9 @@ import mockData from '../src/mock/mock.json';
 const App = () => {
   return (
     <div>
-      <FormArchitect />
+      <div style={{ padding: 20 }}>
+        <FormArchitect />
+      </div>
       <RFARenderer onSubmit={(data) => console.log(data)} data={mockData} />
     </div>
   );

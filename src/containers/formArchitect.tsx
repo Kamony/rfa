@@ -35,11 +35,11 @@ export const FormArchitect = (props: FormArchitectProps) => {
     <DndProvider backend={HTML5Backend}>
       <ThemeProvider theme={Theme}>
         <CssBaseline />
-        <Grid container direction={'row'} spacing={2} justify={'center'}>
+        <Grid container direction={'row'} spacing={1} justify={'center'}>
           <Grid item xs={3}>
             <FieldBox formElements={FormElements} />
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <DropArea />
           </Grid>
         </Grid>

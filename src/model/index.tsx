@@ -317,7 +317,7 @@ export const formElements: FormElement[] = [
   {
     name: 'slider',
     label: 'Slider',
-    description: 'for selecting number interactively',
+    description: 'for selecting a number interactively',
     icon: <SliderIcon color={'secondary'} />,
     render: Components.SLIDER,
     isCustomRegistered: true,
