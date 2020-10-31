@@ -1,0 +1,636 @@
+{
+    "elements": [
+        {
+            "id": "b257f934-f21d-4357-a547-bef2c92af8a5",
+            "label": "Text",
+            "name": "text",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "input",
+                    "label": "placeholder",
+                    "value": "text placeholder"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                },
+                {
+                    "name": "type",
+                    "type": "select",
+                    "label": "type",
+                    "options": [
+                        {
+                            "name": "text"
+                        },
+                        {
+                            "name": "password"
+                        },
+                        {
+                            "name": "email"
+                        }
+                    ],
+                    "value": "text"
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "placeholder": "text placeholder",
+                "helperText": "helper text",
+                "type": "text"
+            },
+            "render": "TextInput",
+            "groupID": "79ae532e-9083-4227-b000-bfbbe5c82693",
+            "groupPosition": 1,
+            "validations": {},
+            "validationType": "string",
+            "validators": [
+                "required",
+                "min",
+                "max",
+                "length",
+                "matches",
+                "email",
+                "url"
+            ]
+        },
+        {
+            "id": "db675499-4406-48c7-b650-d62535bf5249",
+            "label": "Number",
+            "name": "number",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "input",
+                    "label": "placeholder",
+                    "value": "text placeholder"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "placeholder": "text placeholder",
+                "helperText": "helper text"
+            },
+            "render": "NumberInput",
+            "groupID": "79ae532e-9083-4227-b000-bfbbe5c82693",
+            "groupPosition": 2,
+            "validations": {},
+            "validationType": "number",
+            "validators": [
+                "required",
+                "min",
+                "max",
+                "lessThan",
+                "moreThan",
+                "positive",
+                "negative",
+                "integer"
+            ]
+        },
+        {
+            "id": "108cfdc8-9e43-4568-baf2-51bf0e5e10bd",
+            "label": "Checkbox",
+            "name": "checkbox",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                },
+                {
+                    "type": "options",
+                    "name": "options",
+                    "label": "manage options",
+                    "options": [
+                        {
+                            "name": "opt1"
+                        },
+                        {
+                            "name": "opt2"
+                        },
+                        {
+                            "name": "opt3"
+                        }
+                    ]
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "helperText": "helper text",
+                "options": [
+                    {
+                        "name": "opt1"
+                    },
+                    {
+                        "name": "opt2"
+                    },
+                    {
+                        "name": "opt3"
+                    }
+                ]
+            },
+            "render": "CheckBox",
+            "groupID": "79ae532e-9083-4227-b000-bfbbe5c82693",
+            "groupPosition": 3,
+            "validations": {},
+            "validationType": "array"
+        },
+        {
+            "id": "d8a8c43e-8579-47bb-a2f9-37aeeeabfd31",
+            "label": "Radio",
+            "name": "radio",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                },
+                {
+                    "type": "options",
+                    "name": "options",
+                    "label": "manage options",
+                    "options": [
+                        {
+                            "name": "opt1"
+                        },
+                        {
+                            "name": "opt2"
+                        },
+                        {
+                            "name": "opt3"
+                        }
+                    ]
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "helperText": "helper text",
+                "options": [
+                    {
+                        "name": "opt1"
+                    },
+                    {
+                        "name": "opt2"
+                    },
+                    {
+                        "name": "opt3"
+                    }
+                ]
+            },
+            "render": "Radio",
+            "groupID": "79ae532e-9083-4227-b000-bfbbe5c82693",
+            "groupPosition": 4,
+            "validations": {},
+            "validationType": "string"
+        },
+        {
+            "id": "cbdf31b3-1551-4b25-9f21-57ab271d20a4",
+            "label": "Select",
+            "name": "select",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                },
+                {
+                    "type": "options",
+                    "name": "options",
+                    "label": "manage options",
+                    "options": [
+                        {
+                            "name": "opt1"
+                        },
+                        {
+                            "name": "opt2"
+                        },
+                        {
+                            "name": "opt3"
+                        }
+                    ]
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "helperText": "helper text",
+                "options": [
+                    {
+                        "name": "opt1"
+                    },
+                    {
+                        "name": "opt2"
+                    },
+                    {
+                        "name": "opt3"
+                    }
+                ]
+            },
+            "render": "Select",
+            "groupID": "79ae532e-9083-4227-b000-bfbbe5c82693",
+            "groupPosition": 5,
+            "validations": {},
+            "validationType": "string"
+        },
+        {
+            "id": "02ca37b0-5fe1-41e5-bdbb-43d5653668a7",
+            "label": "Text",
+            "name": "text-e7a05424-eecb-4b44-9c4b-20bbca15ee16",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "input",
+                    "label": "placeholder",
+                    "value": "text placeholder"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                },
+                {
+                    "name": "type",
+                    "type": "select",
+                    "label": "type",
+                    "options": [
+                        {
+                            "name": "text"
+                        },
+                        {
+                            "name": "password"
+                        },
+                        {
+                            "name": "email"
+                        }
+                    ],
+                    "value": "text"
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "placeholder": "text placeholder",
+                "helperText": "helper text",
+                "type": "text"
+            },
+            "render": "TextInput",
+            "groupID": "0d6a81e9-83e8-4204-8c55-c7185e7295ce",
+            "groupPosition": 1,
+            "validations": {},
+            "validationType": "string",
+            "validators": [
+                "required",
+                "min",
+                "max",
+                "length",
+                "matches",
+                "email",
+                "url"
+            ]
+        },
+        {
+            "id": "7f86d866-46f4-4e54-8c4f-5017ef2652fa",
+            "label": "Checkbox",
+            "name": "checkbox-692a8f13-6f41-44d3-ade1-528836ec1b5e",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                },
+                {
+                    "type": "options",
+                    "name": "options",
+                    "label": "manage options",
+                    "options": [
+                        {
+                            "name": "opt1"
+                        },
+                        {
+                            "name": "opt2"
+                        },
+                        {
+                            "name": "opt3"
+                        }
+                    ]
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "helperText": "helper text",
+                "options": [
+                    {
+                        "name": "opt1"
+                    },
+                    {
+                        "name": "opt2"
+                    },
+                    {
+                        "name": "opt3"
+                    }
+                ]
+            },
+            "render": "CheckBox",
+            "groupID": "0d6a81e9-83e8-4204-8c55-c7185e7295ce",
+            "groupPosition": 2,
+            "validations": {},
+            "validationType": "array"
+        },
+        {
+            "id": "e8ebe756-cb0d-4dc7-b43e-cb4893fead58",
+            "label": "Select - multiple options",
+            "name": "select- multiple options",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                },
+                {
+                    "type": "options",
+                    "name": "options",
+                    "label": "manage options",
+                    "options": [
+                        {
+                            "name": "opt1"
+                        },
+                        {
+                            "name": "opt2"
+                        },
+                        {
+                            "name": "opt3"
+                        }
+                    ]
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "helperText": "helper text",
+                "options": [
+                    {
+                        "name": "opt1"
+                    },
+                    {
+                        "name": "opt2"
+                    },
+                    {
+                        "name": "opt3"
+                    }
+                ]
+            },
+            "render": "SelectMulti",
+            "groupID": "0d6a81e9-83e8-4204-8c55-c7185e7295ce",
+            "groupPosition": 3,
+            "validations": {},
+            "validationType": "array"
+        },
+        {
+            "id": "d0539300-0030-4985-be5e-2c96e748360c",
+            "label": "Switch",
+            "name": "switch",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "helperText": "helper text"
+            },
+            "render": "Switch",
+            "groupID": "0d6a81e9-83e8-4204-8c55-c7185e7295ce",
+            "groupPosition": 4,
+            "validations": {},
+            "validationType": "boolean"
+        },
+        {
+            "id": "06d29fec-05cb-41fb-a334-7264090e6687",
+            "label": "Select",
+            "name": "select-a915da29-256e-45d8-91c3-83fbd918dd7c",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                },
+                {
+                    "type": "options",
+                    "name": "options",
+                    "label": "manage options",
+                    "options": [
+                        {
+                            "name": "opt1"
+                        },
+                        {
+                            "name": "opt2"
+                        },
+                        {
+                            "name": "opt3"
+                        }
+                    ]
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "helperText": "helper text",
+                "options": [
+                    {
+                        "name": "opt1"
+                    },
+                    {
+                        "name": "opt2"
+                    },
+                    {
+                        "name": "opt3"
+                    }
+                ]
+            },
+            "render": "Select",
+            "groupID": "52aa81cd-639d-4a97-b170-0bdc7f8c5447",
+            "groupPosition": 1,
+            "validations": {},
+            "validationType": "string"
+        },
+        {
+            "id": "649f66ec-c236-42e9-85bb-191df56ba374",
+            "label": "Slider",
+            "name": "slider",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "min",
+                    "type": "input",
+                    "label": "Min Value",
+                    "value": 0
+                },
+                {
+                    "name": "max",
+                    "type": "input",
+                    "label": "Max Value",
+                    "value": 100
+                },
+                {
+                    "name": "step",
+                    "type": "input",
+                    "label": "Step",
+                    "value": 1
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "helperText": "helper text"
+            },
+            "render": "Slider",
+            "isCustomRegistered": true,
+            "groupID": "52aa81cd-639d-4a97-b170-0bdc7f8c5447",
+            "groupPosition": 2,
+            "validations": {},
+            "validationType": "number",
+            "validators": [
+                "required",
+                "min",
+                "max",
+                "lessThan",
+                "moreThan",
+                "positive",
+                "negative",
+                "integer"
+            ]
+        },
+        {
+            "id": "85a91a54-46bb-4b73-8261-b26e7783ba47",
+            "label": "Switch",
+            "name": "switch-82ad2337-fbc9-4c9c-9d71-f57a65666a8c",
+            "attributeSchema": [
+                {
+                    "name": "label",
+                    "type": "input",
+                    "label": "label",
+                    "value": "text label"
+                },
+                {
+                    "name": "helperText",
+                    "type": "input",
+                    "label": "helperText",
+                    "value": "helper text"
+                }
+            ],
+            "attributes": {
+                "label": "text label",
+                "helperText": "helper text"
+            },
+            "render": "Switch",
+            "groupID": "52aa81cd-639d-4a97-b170-0bdc7f8c5447",
+            "groupPosition": 3,
+            "validations": {},
+            "validationType": "boolean"
+        }
+    ],
+    "grouping": {
+        "activeGroup": "52aa81cd-639d-4a97-b170-0bdc7f8c5447",
+        "groups": [
+            {
+                "id": "79ae532e-9083-4227-b000-bfbbe5c82693",
+                "name": "default group"
+            },
+            {
+                "id": "0d6a81e9-83e8-4204-8c55-c7185e7295ce",
+                "name": "Group 1"
+            },
+            {
+                "id": "52aa81cd-639d-4a97-b170-0bdc7f8c5447",
+                "name": "Group 2"
+            }
+        ]
+    }
+}
