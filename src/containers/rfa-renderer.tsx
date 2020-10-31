@@ -1,7 +1,7 @@
-import React from "react";
-import { IState } from "../store/store";
-import { FieldValues, useForm } from "react-hook-form";
-import { componentMapper } from "../model";
+import React from 'react';
+import { IState } from '../store/store';
+import { FieldValues, useForm } from 'react-hook-form';
+import { componentMapper } from '../model';
 import {
   Box,
   Button,
@@ -11,18 +11,22 @@ import {
   makeStyles,
   Paper,
   Theme,
+  ThemeOptions,
+  ThemeProvider,
   Typography,
-} from "@material-ui/core";
-import { useValidationCreator } from "../hooks";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useFormRenderer } from "../hooks/useFormRenderer";
+} from '@material-ui/core';
+import { useValidationCreator } from '../hooks';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useFormRenderer } from '../hooks/useFormRenderer';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 type Props = {
   data: IState;
   onSubmit: (data: FieldValues) => void;
+  theme?: ThemeOptions;
 };
 
-export const RFARenderer = ({ data, onSubmit }: Props) => {
+export const RFARenderer = ({ data, onSubmit, theme }: Props) => {
   const {
     data: { ValidationSchema },
   } = useValidationCreator();
@@ -45,54 +49,64 @@ export const RFARenderer = ({ data, onSubmit }: Props) => {
 
   const classes = useStyles();
 
+  const Theme: Theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        ...theme,
+      }),
+    []
+  );
+
   return (
-    <Container maxWidth={"xl"}>
+    <ThemeProvider theme={Theme}>
       <CssBaseline />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box>
-          {Object.entries(GroupReducedElements).map(
-            ([groupName, elements], index) => (
-              <Box id={"form-group"} key={index} className={classes.group}>
-                {shouldRenderGroups && (
-                  <>
-                    <Typography variant={"h5"} gutterBottom>
-                      {groupName}
-                    </Typography>
-                  </>
-                )}
-                <Paper
-                  variant={"outlined"}
-                  id={"form-group-content"}
-                  className={classes.groupContent}
-                >
-                  {elements.map((element) => (
-                    <Box
-                      id={"form-element"}
-                      key={element.id}
-                      className={classes.formElement}
-                    >
-                      {React.createElement(componentMapper[element.render], {
-                        ...{ register, unregister, control, setValue },
-                        ...element.attributes,
-                        name: element.name,
-                        error: errors?.[element.name],
-                      })}
-                    </Box>
-                  ))}
-                </Paper>
-              </Box>
-            )
-          )}
-        </Box>
-        <Button variant={"contained"} type={"submit"}>
-          submit
-        </Button>
-      </form>
-    </Container>
+      <Container maxWidth={'xl'}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Box>
+            {Object.entries(GroupReducedElements).map(
+              ([groupName, elements], index) => (
+                <Box id={'form-group'} key={index} className={classes.group}>
+                  {shouldRenderGroups && (
+                    <>
+                      <Typography variant={'h5'} gutterBottom>
+                        {groupName}
+                      </Typography>
+                    </>
+                  )}
+                  <Paper
+                    variant={'outlined'}
+                    id={'form-group-content'}
+                    className={classes.groupContent}
+                  >
+                    {elements.map((element) => (
+                      <Box
+                        id={'form-element'}
+                        key={element.id}
+                        className={classes.formElement}
+                      >
+                        {React.createElement(componentMapper[element.render], {
+                          ...{ register, unregister, control, setValue },
+                          ...element.attributes,
+                          name: element.name,
+                          error: errors?.[element.name],
+                        })}
+                      </Box>
+                    ))}
+                  </Paper>
+                </Box>
+              )
+            )}
+          </Box>
+          <Button variant={'contained'} type={'submit'}>
+            submit
+          </Button>
+        </form>
+      </Container>
+    </ThemeProvider>
   );
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     group: {
       paddingBottom: theme.spacing(3),
@@ -102,7 +116,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     formElement: {
       marginTop: theme.spacing(1.5),
-      "&:nth-child(1)": {
+      '&:nth-child(1)': {
         marginTop: 0,
       },
     },

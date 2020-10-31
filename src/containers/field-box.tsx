@@ -1,12 +1,14 @@
-import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Box, Divider, List, Paper, Typography } from "@material-ui/core";
-import { FormElement, formElements } from "../model";
-import { DraggableField } from "../components/draggable-field";
-import { useFormElements } from "../hooks/useFormElements";
+import React from 'react';
+import { makeStyles } from '@material-ui/styles';
+import { Box, List, Paper, Typography } from '@material-ui/core';
+import { FormElement } from '../model';
+import { DraggableField } from '../components';
+import { useFormElements } from '../hooks';
 
-type Props = {
-  children?: React.ReactNode;
+type FieldBoxProps = {
+  formElements: FormElement[];
+
+  children?: never;
 };
 
 const useStyles = makeStyles({
@@ -15,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const FieldBox: React.FC<Props> = (props: Props) => {
+export const FieldBox = ({ formElements }: FieldBoxProps) => {
   const classes = useStyles();
   const { createFormElement } = useFormElements();
 
@@ -23,13 +25,13 @@ export const FieldBox: React.FC<Props> = (props: Props) => {
     (formElement: FormElement) => createFormElement(formElement),
     [createFormElement]
   );
-
+  console.log(formElements);
   return (
-    <Box display={"flex"} flexDirection={"column"}>
-      <Typography variant={"h5"} color={"primary"} gutterBottom>
+    <Box display={'flex'} flexDirection={'column'}>
+      <Typography variant={'h5'} color={'primary'} gutterBottom>
         Form toolbox
       </Typography>
-      <Paper className={classes.container} variant={"outlined"}>
+      <Paper className={classes.container} variant={'outlined'}>
         <List>
           {formElements.map((formElement, i) => (
             <DraggableField
@@ -38,8 +40,6 @@ export const FieldBox: React.FC<Props> = (props: Props) => {
               onClick={() => handleClick(formElement)}
             />
           ))}
-          <Divider />
-          {props.children}
         </List>
       </Paper>
     </Box>

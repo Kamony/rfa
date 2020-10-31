@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   CheckBoxOutlined as CheckBoxIcon,
   FormatColorTextOutlined as TextInputIcon,
@@ -7,7 +7,7 @@ import {
   RadioButtonCheckedOutlined as RadioIcon,
   ToggleOnOutlined as SwitchIcon,
   Looks3Outlined as NumberIcon,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 import {
   CheckBox,
   NumberInput,
@@ -17,7 +17,7 @@ import {
   Slider,
   Switch,
   TextInput,
-} from "../components/form-components";
+} from '../components/form-components';
 import {
   Email,
   Integer,
@@ -31,7 +31,7 @@ import {
   Regex,
   Required,
   Url,
-} from "../components/form-validators";
+} from '../components/form-validators';
 
 export type OptionType = {
   name: string;
@@ -41,12 +41,12 @@ export type AttributeValueType = string | number | boolean | string[];
 
 export type AttributeSchema = {
   name: string;
-  type: "input" | "select" | "radio" | "switch" | "checkbox" | "options"; // for editing purposes of attribute
+  type: 'input' | 'select' | 'radio' | 'switch' | 'checkbox' | 'options'; // for editing purposes of attribute
   label: string;
   value?: AttributeValueType;
   options?: OptionType[];
 };
-export type ValidationType = "string" | "number" | "array" | "boolean"; //for setting validations
+export type ValidationType = 'string' | 'number' | 'array' | 'boolean'; //for setting validations
 
 export type Validation = {
   type: string;
@@ -56,6 +56,7 @@ export type Validation = {
 export type FormElement = {
   name: string;
   label: string;
+  description?: string;
   icon: React.ReactElement<any>;
   render: keyof typeof componentMapper;
   attributes: AttributeSchema[];
@@ -66,14 +67,14 @@ export type FormElement = {
 };
 
 export enum Components {
-  INPUT = "TextInput",
-  NUMBER = "NumberInput",
-  CHECKBOX = "CheckBox",
-  RADIO = "Radio",
-  SELECT = "Select",
-  SELECTMULTI = "SelectMulti",
-  SWITCH = "Switch",
-  SLIDER = "Slider",
+  INPUT = 'TextInput',
+  NUMBER = 'NumberInput',
+  CHECKBOX = 'CheckBox',
+  RADIO = 'Radio',
+  SELECT = 'Select',
+  SELECTMULTI = 'SelectMulti',
+  SWITCH = 'Switch',
+  SLIDER = 'Slider',
 }
 
 export const componentMapper: Record<Components, React.FC<any>> = {
@@ -88,18 +89,18 @@ export const componentMapper: Record<Components, React.FC<any>> = {
 };
 
 export enum Validators {
-  REQUIRED = "required",
-  MIN = "min",
-  MAX = "max",
-  LENGTH = "length",
-  REGEX = "matches",
-  EMAIL = "email",
-  URL = "url",
-  MORETHAN = "moreThan",
-  LESSTHAN = "lessThan",
-  POSITIVE = "positive",
-  NEGATIVE = "negative",
-  INTEGER = "integer",
+  REQUIRED = 'required',
+  MIN = 'min',
+  MAX = 'max',
+  LENGTH = 'length',
+  REGEX = 'matches',
+  EMAIL = 'email',
+  URL = 'url',
+  MORETHAN = 'moreThan',
+  LESSTHAN = 'lessThan',
+  POSITIVE = 'positive',
+  NEGATIVE = 'negative',
+  INTEGER = 'integer',
 }
 
 export const validatorsMapper: Record<Validators, React.FC<any>> = {
@@ -119,33 +120,34 @@ export const validatorsMapper: Record<Validators, React.FC<any>> = {
 
 export const formElements: FormElement[] = [
   {
-    name: "text-input",
-    label: "Text",
-    icon: <TextInputIcon color={"secondary"} />,
+    name: 'text-input',
+    label: 'Text',
+    description: 'for names, addresses, passwords, urls...',
+    icon: <TextInputIcon color={'secondary'} />,
     render: Components.INPUT,
     attributes: [
-      { name: "label", type: "input", label: "label", value: "text label" },
+      { name: 'label', type: 'input', label: 'label', value: 'text label' },
       {
-        name: "placeholder",
-        type: "input",
-        label: "placeholder",
-        value: "text placeholder",
+        name: 'placeholder',
+        type: 'input',
+        label: 'placeholder',
+        value: 'text placeholder',
       },
       {
-        name: "helperText",
-        type: "input",
-        label: "helperText",
-        value: "helper text",
+        name: 'helperText',
+        type: 'input',
+        label: 'helperText',
+        value: 'helper text',
       },
       {
-        name: "type",
-        type: "select",
-        label: "type",
-        options: [{ name: "text" }, { name: "password" }, { name: "email" }],
-        value: "text",
+        name: 'type',
+        type: 'select',
+        label: 'type',
+        options: [{ name: 'text' }, { name: 'password' }, { name: 'email' }],
+        value: 'text',
       },
     ],
-    validationType: "string",
+    validationType: 'string',
     validators: [
       Validators.REQUIRED,
       Validators.MIN,
@@ -157,26 +159,27 @@ export const formElements: FormElement[] = [
     ],
   },
   {
-    name: "number-input",
-    label: "Number",
-    icon: <NumberIcon color={"secondary"} />,
+    name: 'number-input',
+    label: 'Number',
+    description: 'for ages, sums, counts...',
+    icon: <NumberIcon color={'secondary'} />,
     render: Components.NUMBER,
     attributes: [
-      { name: "label", type: "input", label: "label", value: "number label" },
+      { name: 'label', type: 'input', label: 'label', value: 'number label' },
       {
-        name: "placeholder",
-        type: "input",
-        label: "placeholder",
-        value: "number placeholder",
+        name: 'placeholder',
+        type: 'input',
+        label: 'placeholder',
+        value: 'number placeholder',
       },
       {
-        name: "helperText",
-        type: "input",
-        label: "helperText",
-        value: "number helper text",
+        name: 'helperText',
+        type: 'input',
+        label: 'helperText',
+        value: 'number helper text',
       },
     ],
-    validationType: "number",
+    validationType: 'number',
     validators: [
       Validators.REQUIRED,
       Validators.MIN,
@@ -189,142 +192,148 @@ export const formElements: FormElement[] = [
     ],
   },
   {
-    name: "checkbox",
-    label: "Checkbox",
-    icon: <CheckBoxIcon color={"secondary"} />,
+    name: 'checkbox',
+    label: 'Checkbox',
+    description: 'for selecting one or more options',
+    icon: <CheckBoxIcon color={'secondary'} />,
     render: Components.CHECKBOX,
     attributes: [
       {
-        name: "label",
-        type: "input",
-        label: "label",
-        value: "checkboxes label",
+        name: 'label',
+        type: 'input',
+        label: 'label',
+        value: 'checkboxes label',
       },
       {
-        name: "helperText",
-        type: "input",
-        label: "helperText",
-        value: "checkboxes helper text",
+        name: 'helperText',
+        type: 'input',
+        label: 'helperText',
+        value: 'checkboxes helper text',
       },
       {
-        type: "options",
-        name: "options",
-        label: "manage options",
-        options: [{ name: "opt1" }, { name: "opt2" }, { name: "opt3" }],
+        type: 'options',
+        name: 'options',
+        label: 'manage options',
+        options: [{ name: 'opt1' }, { name: 'opt2' }, { name: 'opt3' }],
       },
     ],
-    validationType: "array",
+    validationType: 'array',
     validators: [Validators.REQUIRED],
   },
   {
-    name: "radio",
-    label: "Radio",
-    icon: <RadioIcon color={"secondary"} />,
+    name: 'radio',
+    label: 'Radio',
+    description: 'for selecting one option',
+    icon: <RadioIcon color={'secondary'} />,
     render: Components.RADIO,
     attributes: [
-      { name: "label", type: "input", label: "label", value: "radio label" },
+      { name: 'label', type: 'input', label: 'label', value: 'radio label' },
       {
-        name: "helperText",
-        type: "input",
-        label: "helperText",
-        value: "radio helper text",
+        name: 'helperText',
+        type: 'input',
+        label: 'helperText',
+        value: 'radio helper text',
       },
       {
-        type: "options",
-        name: "options",
-        label: "manage options",
-        options: [{ name: "opt1" }, { name: "opt2" }, { name: "opt3" }],
+        type: 'options',
+        name: 'options',
+        label: 'manage options',
+        options: [{ name: 'opt1' }, { name: 'opt2' }, { name: 'opt3' }],
       },
     ],
-    validationType: "string",
+    validationType: 'string',
     validators: [Validators.REQUIRED],
   },
   {
-    name: "select",
-    label: "Select",
-    icon: <SelectIcon color={"secondary"} />,
+    name: 'select',
+    label: 'Select',
+    description: 'for selecting one from numerous options',
+    icon: <SelectIcon color={'secondary'} />,
     render: Components.SELECT,
     attributes: [
-      { name: "label", type: "input", label: "label", value: "select label" },
+      { name: 'label', type: 'input', label: 'label', value: 'select label' },
       {
-        name: "helperText",
-        type: "input",
-        label: "helperText",
-        value: "select helper text",
+        name: 'helperText',
+        type: 'input',
+        label: 'helperText',
+        value: 'select helper text',
       },
       {
-        type: "options",
-        name: "options",
-        label: "manage options",
-        options: [{ name: "opt1" }, { name: "opt2" }, { name: "opt3" }],
+        type: 'options',
+        name: 'options',
+        label: 'manage options',
+        options: [{ name: 'opt1' }, { name: 'opt2' }, { name: 'opt3' }],
       },
     ],
-    validationType: "string",
+    validationType: 'string',
     validators: [Validators.REQUIRED],
   },
   {
-    name: "multiSelect",
-    label: "Select - multiple options",
-    icon: <SelectIcon color={"secondary"} />,
+    name: 'multiSelect',
+    label: 'Select - multiple options',
+    description: 'for selecting one or more from numerous options',
+    icon: <SelectIcon color={'secondary'} />,
     render: Components.SELECTMULTI,
     attributes: [
       {
-        name: "label",
-        type: "input",
-        label: "label",
-        value: "multi select label",
+        name: 'label',
+        type: 'input',
+        label: 'label',
+        value: 'multi select label',
       },
       {
-        name: "helperText",
-        type: "input",
-        label: "helperText",
-        value: "multi select helper text",
+        name: 'helperText',
+        type: 'input',
+        label: 'helperText',
+        value: 'multi select helper text',
       },
       {
-        type: "options",
-        name: "options",
-        label: "manage options",
-        options: [{ name: "opt1" }, { name: "opt2" }, { name: "opt3" }],
+        type: 'options',
+        name: 'options',
+        label: 'manage options',
+        options: [{ name: 'opt1' }, { name: 'opt2' }, { name: 'opt3' }],
       },
     ],
-    validationType: "array",
+    validationType: 'array',
     validators: [Validators.REQUIRED],
   },
   {
-    name: "switch",
-    label: "Switch",
-    icon: <SwitchIcon color={"secondary"} />,
+    name: 'switch',
+    label: 'Switch',
+    description: 'for simple yes or no answers',
+    icon: <SwitchIcon color={'secondary'} />,
     render: Components.SWITCH,
     attributes: [
-      { name: "label", type: "input", label: "label", value: "switch label" },
+      { name: 'label', type: 'input', label: 'label', value: 'switch label' },
       {
-        name: "helperText",
-        type: "input",
-        label: "helperText",
-        value: "switch helper text",
+        name: 'helperText',
+        type: 'input',
+        label: 'helperText',
+        value: 'switch helper text',
       },
     ],
-    validationType: "boolean",
+    validationType: 'boolean',
   },
   {
-    name: "slider",
-    label: "Slider",
-    icon: <SliderIcon color={"secondary"} />,
+    name: 'slider',
+    label: 'Slider',
+    description: 'for selecting number interactively',
+    icon: <SliderIcon color={'secondary'} />,
     render: Components.SLIDER,
     isCustomRegistered: true,
     attributes: [
-      { name: "label", type: "input", label: "label", value: "slider label" },
-      { name: "min", type: "input", label: "Min Value", value: 0 },
-      { name: "max", type: "input", label: "Max Value", value: 100 },
-      { name: "step", type: "input", label: "Step", value: 1 },
+      { name: 'label', type: 'input', label: 'label', value: 'slider label' },
+      { name: 'min', type: 'input', label: 'Min Value', value: 0 },
+      { name: 'max', type: 'input', label: 'Max Value', value: 100 },
+      { name: 'step', type: 'input', label: 'Step', value: 1 },
       {
-        name: "helperText",
-        type: "input",
-        label: "helperText",
-        value: "slider helper text",
+        name: 'helperText',
+        type: 'input',
+        label: 'helperText',
+        value: 'slider helper text',
       },
     ],
-    validationType: "number",
+    validationType: 'number',
     validators: [
       Validators.REQUIRED,
       Validators.MIN,

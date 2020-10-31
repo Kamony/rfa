@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useDrop } from "react-dnd";
+import * as React from 'react';
+import { useDrop } from 'react-dnd';
 import {
   AppBar,
   Box,
@@ -9,15 +9,12 @@ import {
   Paper,
   Tabs,
   TextField,
-} from "@material-ui/core";
-import { FormArchitect } from "./form-architect";
-import { useFormElements } from "../hooks/useFormElements";
-import { FormElement } from "../model";
-import { useGrouping } from "../hooks/useGrouping";
-import { useDialog } from "../hooks/useDialog";
-import { ConfirmationDialog } from "../components/dialogs/confirmation-dialog";
-import { CustomDialog } from "../components/dialogs/custom-dialog";
-import { DraggableTag } from "../components/draggable-tag";
+} from '@material-ui/core';
+import { FormElementsContainer } from './form-elements-container';
+import { useDialog, useFormElements, useGrouping } from '../hooks';
+import { FormElement } from '../model';
+import { ConfirmationDialog, CustomDialog } from '../components/dialogs';
+import { DraggableTag } from '../components';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -43,27 +40,27 @@ function TabPanel(props: TabPanelProps) {
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    flex: "1 1 0",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    flexDirection: "column",
+    display: 'flex',
+    flex: '1 1 0',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
   },
   contentWrapper: {
     padding: 10,
   },
   dropArea: {
-    width: "100%",
-    justifyContent: "center",
+    width: '100%',
+    justifyContent: 'center',
   },
   buttonGroup: {
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     paddingBottom: 5,
   },
 });
 
 export const DropArea = () => {
-  const [customizedGroupName, setCustomizedGroupName] = React.useState("");
+  const [customizedGroupName, setCustomizedGroupName] = React.useState('');
 
   const classes = useStyles();
   const {
@@ -80,7 +77,7 @@ export const DropArea = () => {
   const [openRename, handleOpenRename, handleCloseRename] = useDialog();
 
   const [, drop] = useDrop({
-    accept: "draggable-field",
+    accept: 'draggable-field',
     drop: (dropItem) => {
       createFormElement((dropItem as unknown) as FormElement);
     },
@@ -99,12 +96,12 @@ export const DropArea = () => {
 
   const handleGroupRename = React.useCallback(() => {
     renameGroup(customizedGroupName);
-    setCustomizedGroupName("");
+    setCustomizedGroupName('');
     handleCloseRename();
   }, [customizedGroupName, handleCloseRename, renameGroup]);
 
   const handleGroupRenameOpen = React.useCallback(() => {
-    setCustomizedGroupName(ActiveGroupName || "");
+    setCustomizedGroupName(ActiveGroupName || '');
     handleOpenRename();
   }, [ActiveGroupName, handleOpenRename]);
 
@@ -121,13 +118,13 @@ export const DropArea = () => {
 
   return (
     <Box
-      display={"flex"}
-      flexDirection={"column"}
-      style={{ height: "100%", width: "100%" }}
+      display={'flex'}
+      flexDirection={'column'}
+      style={{ height: '100%', width: '100%' }}
     >
       <ButtonGroup
         color="primary"
-        size={"small"}
+        size={'small'}
         aria-label="outlined primary button group"
         className={classes.buttonGroup}
       >
@@ -137,14 +134,14 @@ export const DropArea = () => {
           <Button onClick={handleOpenDelete}>Delete Group</Button>
         )}
       </ButtonGroup>
-      <Paper ref={drop} className={classes.root} variant={"outlined"}>
+      <Paper ref={drop} className={classes.root} variant={'outlined'}>
         {groupings.groups.length > 0 && (
           <AppBar position="static" color="default" elevation={0}>
             <Tabs
               value={groupings.activeGroup}
               onChange={handleChange}
               variant="scrollable"
-              scrollButtons={"auto"}
+              scrollButtons={'auto'}
               aria-label="simple tabs example"
             >
               {groupings.groups.map((group, i) => (
@@ -170,7 +167,7 @@ export const DropArea = () => {
             index={group.id}
             className={classes.dropArea}
           >
-            <FormArchitect />
+            <FormElementsContainer />
           </TabPanel>
         ))}
       </Paper>
@@ -179,7 +176,7 @@ export const DropArea = () => {
       <ConfirmationDialog
         opened={openDelete}
         title={`Are you sure to delete ${ActiveGroupName}?`}
-        text={"You will lose its form progress"}
+        text={'You will lose its form progress'}
         onSuccess={handleGroupDelete}
         onDeny={handleCloseDelete}
       />
