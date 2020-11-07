@@ -82,8 +82,8 @@ export const RfaSchemaTransferer = ({ open, onClose }: Props) => {
 
       <DialogContent>
         <Typography color={'textSecondary'}>
-          Export data as JSON file and/or import it to react form architect -
-          renderer
+          Export form data as JSON file and/or import it to react form architect
+          - renderer
         </Typography>
         <Box
           display={'flex'}
