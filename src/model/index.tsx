@@ -3,10 +3,10 @@ import {
   CheckBoxOutlined as CheckBoxIcon,
   FormatColorTextOutlined as TextInputIcon,
   LinearScaleOutlined as SliderIcon,
+  Looks3Outlined as NumberIcon,
   MenuOpenOutlined as SelectIcon,
   RadioButtonCheckedOutlined as RadioIcon,
   ToggleOnOutlined as SwitchIcon,
-  Looks3Outlined as NumberIcon,
 } from '@material-ui/icons';
 import {
   CheckBox,
@@ -58,7 +58,7 @@ export type FormElement = {
   label: string;
   description?: string;
   icon: React.ReactElement<any>;
-  render: keyof typeof componentMapper;
+  render: React.FC<any>;
   attributes: AttributeSchema[];
   validators?: (keyof typeof validatorsMapper)[];
   validationType: ValidationType;
@@ -124,7 +124,7 @@ export const formElements: FormElement[] = [
     label: 'Text',
     description: 'for names, addresses, passwords, urls...',
     icon: <TextInputIcon color={'secondary'} />,
-    render: Components.INPUT,
+    render: TextInput,
     attributes: [
       { name: 'label', type: 'input', label: 'label', value: 'text label' },
       {
@@ -163,7 +163,7 @@ export const formElements: FormElement[] = [
     label: 'Number',
     description: 'for ages, sums, counts...',
     icon: <NumberIcon color={'secondary'} />,
-    render: Components.NUMBER,
+    render: NumberInput,
     attributes: [
       { name: 'label', type: 'input', label: 'label', value: 'number label' },
       {
@@ -196,7 +196,7 @@ export const formElements: FormElement[] = [
     label: 'Checkbox',
     description: 'for selecting one or more options',
     icon: <CheckBoxIcon color={'secondary'} />,
-    render: Components.CHECKBOX,
+    render: CheckBox,
     attributes: [
       {
         name: 'label',
@@ -225,7 +225,7 @@ export const formElements: FormElement[] = [
     label: 'Radio',
     description: 'for selecting one option',
     icon: <RadioIcon color={'secondary'} />,
-    render: Components.RADIO,
+    render: Radio,
     attributes: [
       { name: 'label', type: 'input', label: 'label', value: 'radio label' },
       {
@@ -249,7 +249,7 @@ export const formElements: FormElement[] = [
     label: 'Select',
     description: 'for selecting one from numerous options',
     icon: <SelectIcon color={'secondary'} />,
-    render: Components.SELECT,
+    render: Select,
     attributes: [
       { name: 'label', type: 'input', label: 'label', value: 'select label' },
       {
@@ -273,7 +273,7 @@ export const formElements: FormElement[] = [
     label: 'Select - multiple options',
     description: 'for selecting one or more from numerous options',
     icon: <SelectIcon color={'secondary'} />,
-    render: Components.SELECTMULTI,
+    render: SelectMulti,
     attributes: [
       {
         name: 'label',
@@ -302,7 +302,7 @@ export const formElements: FormElement[] = [
     label: 'Switch',
     description: 'for simple yes or no answers',
     icon: <SwitchIcon color={'secondary'} />,
-    render: Components.SWITCH,
+    render: Switch,
     attributes: [
       { name: 'label', type: 'input', label: 'label', value: 'switch label' },
       {
@@ -319,7 +319,7 @@ export const formElements: FormElement[] = [
     label: 'Slider',
     description: 'for selecting a number interactively',
     icon: <SliderIcon color={'secondary'} />,
-    render: Components.SLIDER,
+    render: Slider,
     isCustomRegistered: true,
     attributes: [
       { name: 'label', type: 'input', label: 'label', value: 'slider label' },

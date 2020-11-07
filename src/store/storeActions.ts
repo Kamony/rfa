@@ -1,5 +1,5 @@
-import { initialState, IState } from "./store";
-import { StoreActions } from "react-simple-hook-store";
+import { initialState, IState } from './store';
+import type { StoreActions } from 'react-simple-hook-store';
 
 export type StoreGlobalActions = {
   setStore: (newStore: IState) => void;

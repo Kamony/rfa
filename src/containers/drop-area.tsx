@@ -15,6 +15,7 @@ import { useDialog, useFormElements, useGrouping } from '../hooks';
 import { FormElement } from '../model';
 import { ConfirmationDialog, CustomDialog } from '../components/dialogs';
 import { DraggableTag } from '../components';
+import { RfaSchemaTransferer } from './rfa-schema-transferer';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -57,6 +58,10 @@ const useStyles = makeStyles({
     justifyContent: 'flex-end',
     paddingBottom: 5,
   },
+  dataTransferButtonGroup: {
+    justifyContent: 'flex-start',
+    paddingBottom: 5,
+  },
 });
 
 export const DropArea = () => {
@@ -75,6 +80,7 @@ export const DropArea = () => {
   const { createFormElement, allElements } = useFormElements();
   const [openDelete, handleOpenDelete, handleCloseDelete] = useDialog();
   const [openRename, handleOpenRename, handleCloseRename] = useDialog();
+  const [openTransfer, handleOpenTransfer, handleCloseTransfer] = useDialog();
 
   const [, drop] = useDrop({
     accept: 'draggable-field',
@@ -122,18 +128,29 @@ export const DropArea = () => {
       flexDirection={'column'}
       style={{ height: '100%', width: '100%' }}
     >
-      <ButtonGroup
-        color="primary"
-        size={'small'}
-        aria-label="outlined primary button group"
-        className={classes.buttonGroup}
+      <Box
+        width={'100%'}
+        display={'flex'}
+        flexDirection={'row'}
+        justifyContent={'space-between'}
+        paddingBottom={1}
       >
-        <Button onClick={handleAddGroup}>Add Group</Button>
-        <Button onClick={handleGroupRenameOpen}>Rename Active Group</Button>,
-        {groupings.groups.length > 1 && (
-          <Button onClick={handleOpenDelete}>Delete Group</Button>
-        )}
-      </ButtonGroup>
+        <Button variant={'outlined'} onClick={handleOpenTransfer}>
+          Data Transfer
+        </Button>
+        <ButtonGroup
+          color="primary"
+          size={'small'}
+          aria-label="outlined primary button group"
+          // className={classes.buttonGroup}
+        >
+          <Button onClick={handleAddGroup}>Add Group</Button>
+          <Button onClick={handleGroupRenameOpen}>Rename Active Group</Button>,
+          {groupings.groups.length > 1 && (
+            <Button onClick={handleOpenDelete}>Delete Group</Button>
+          )}
+        </ButtonGroup>
+      </Box>
       <Paper ref={drop} className={classes.root} variant={'outlined'}>
         {groupings.groups.length > 0 && (
           <AppBar position="static" color="default" elevation={0}>
@@ -195,6 +212,7 @@ export const DropArea = () => {
           id="name"
         />
       </CustomDialog>
+      <RfaSchemaTransferer open={openTransfer} onClose={handleCloseTransfer} />
     </Box>
   );
 };

@@ -1,5 +1,5 @@
 export { FormElementEditWindow } from './form-element-edit-window';
-export { ExportWindow } from './export-window';
+export { RfaSchemaTransferer } from './rfa-schema-transferer';
 export { FormArchitect } from './formArchitect';
 export { DropArea } from './drop-area';
 export { FieldBox } from './field-box';

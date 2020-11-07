@@ -1,7 +1,6 @@
 import React from 'react';
 import { IState } from '../store/store';
 import { FieldValues, useForm } from 'react-hook-form';
-import { componentMapper } from '../model';
 import {
   Box,
   Button,
@@ -84,7 +83,7 @@ export const RFARenderer = ({ data, onSubmit, theme }: Props) => {
                         key={element.id}
                         className={classes.formElement}
                       >
-                        {React.createElement(componentMapper[element.render], {
+                        {React.createElement(element.render, {
                           ...{ register, unregister, control, setValue },
                           ...element.attributes,
                           name: element.name,
