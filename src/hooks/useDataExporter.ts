@@ -3,7 +3,7 @@ import { useRfaDataConverter } from './useRfaDataConverter';
 import { useStore } from '../store/store';
 import type { FormSchemaType } from '../store/store';
 
-export type ExportedDataType = {
+export type ExportedSchemaType = {
   grouping: FormSchemaType['grouping'];
   elements: (Omit<FormSchemaType['elements'][0], 'render'> & {
     render: string;
@@ -46,14 +46,14 @@ export const useDataExporter = () => {
     setExported(true);
   }, [getStringData]);
 
-  const isTypeofState = (data: any): data is ExportedDataType => {
+  const isTypeofState = (data: any): data is ExportedSchemaType => {
     return !!(
-      (data as ExportedDataType).elements &&
-      (data as ExportedDataType).elements.length &&
-      (data as ExportedDataType).elements[0].id &&
-      (data as ExportedDataType).elements[0].name &&
-      (data as ExportedDataType).elements[0].groupID &&
-      (data as ExportedDataType).grouping
+      (data as ExportedSchemaType).elements &&
+      (data as ExportedSchemaType).elements.length &&
+      (data as ExportedSchemaType).elements[0].id &&
+      (data as ExportedSchemaType).elements[0].name &&
+      (data as ExportedSchemaType).elements[0].groupID &&
+      (data as ExportedSchemaType).grouping
     );
   };
 

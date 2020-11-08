@@ -1,22 +1,29 @@
 import React from 'react';
-import type { FieldValues } from 'react-hook-form';
-import type { Theme, ThemeOptions } from '@material-ui/core';
 import { Container, CssBaseline, ThemeProvider } from '@material-ui/core';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-
-import type { FormSchemaType } from '../store/store';
-import { ExportedDataType } from '../hooks/useDataExporter';
 import { useRfaDataConverter } from '../hooks/useRfaDataConverter';
 import { FormRendererForm } from './form-renderer-form';
 
-type Props = {
-  data: FormSchemaType | ExportedDataType;
+import type { FieldValues } from 'react-hook-form';
+import type { Theme, ThemeOptions } from '@material-ui/core';
+import type { ExportedSchemaType } from '../hooks/useDataExporter';
+import type { FormSchemaType } from '../store/store';
+
+type FormRendererProps = {
+  data: FormSchemaType | ExportedSchemaType;
   onSubmit: (data: FieldValues) => void;
   theme?: ThemeOptions;
   fields?: React.FC<any>[]; // any additional fields
+
+  children?: never;
 };
 
-export const FormRenderer = ({ data, onSubmit, theme, fields }: Props) => {
+export const FormRenderer = ({
+  data,
+  onSubmit,
+  theme,
+  fields,
+}: FormRendererProps) => {
   const {
     handlers: { registerComponents },
   } = useRfaDataConverter();
