@@ -15,17 +15,18 @@ or
 npm i rfa
 ~~~
 
-**React Form Architect** is completely written in typescript, therefore all types are already bundled within the package 
+**React Form Architect** is completely written in Typescript, therefore all types are already bundled within the package 
 
 # Using RFA
-
+Minimal working example
 ~~~ tsx
+import React from 'react';
 import { FormRenderer, FormArchitect } from 'rfa';
-import type { IState, FormElement } from 'rfa';
+import type { FormSchemaType } from 'rfa';
 
 const App = () => {
-  
-  const handleOnFormSave = (formData: IState) => {
+  const [formData, setFormData] = React.useState<FormSchemaType>();
+  const handleOnFormSave = (formSchema: FormSchemaType) => {
     console.log(formData);
     // do something with form data
   };
@@ -33,7 +34,14 @@ const App = () => {
   return (
     <div>
         <FormArchitect onSave={handleOnFormSave} />
+        {formData && (
+            <FormRenderer onSubmit={(data) => console.log(data)} data={formData} />
+        )}
     </div>
   );
 };
 ~~~
+
+
+Check out [Components](../components)
+{: style="font-size: 120%; text-align: center; margin-top: 100px"}
