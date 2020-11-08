@@ -42,4 +42,8 @@ Upon completion generate form schema.
 Use form schema to render a form for your users using [Form Renderer](components#form-renderer).
  Define what to do with fill out data. That's it. No other actions needed.
 
-Check out Installation steps and
+
+
+
+Make your [First Steps](installation) with **RFA**
+{: style="font-size: 120%; text-align: center; margin-top: 100px"}
