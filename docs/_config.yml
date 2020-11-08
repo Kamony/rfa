@@ -23,6 +23,7 @@ url: "https://kamony.github.io" # the base hostname & protocol for your site, e.
 github_username:  kamony
 header_pages:
   - installation.md
+  - components.md
   - about.md
 # Build settings
 markdown: kramdown
