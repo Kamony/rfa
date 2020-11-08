@@ -1,6 +1,6 @@
-import { AttributeType, FormStoredElementType, IState } from "./store";
-import { StoreActions } from "react-simple-hook-store";
-import { uuid } from "../utils/uuid";
+import { AttributeType, FormStoredElementType, FormSchemaType } from './store';
+import { StoreActions } from 'react-simple-hook-store';
+import { uuid } from '../utils/uuid';
 
 export type IActions = {
   addFormElement: (element: FormStoredElementType) => void;
@@ -25,7 +25,7 @@ export type IActions = {
   ) => void;
 };
 
-export const formElementActions: StoreActions<IState, IActions> = {
+export const formElementActions: StoreActions<FormSchemaType, IActions> = {
   addFormElement: (store, element) => {
     store.setState({
       elements: [...store.state.elements, element] as FormStoredElementType[],
@@ -88,7 +88,7 @@ export const formElementActions: StoreActions<IState, IActions> = {
     });
   },
   transferElement: (store, id, groupId) => {
-    formElementActions.setFormElementAttribute(store, id, "groupID", groupId);
+    formElementActions.setFormElementAttribute(store, id, 'groupID', groupId);
   },
   setFormElementAttributes: (store, id, attrs) => {
     const elements = [...store.state.elements] as FormStoredElementType[];

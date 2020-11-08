@@ -1,5 +1,5 @@
-import { FormStoredElementType, GroupType, IState } from "./store";
-import { StoreActions } from "react-simple-hook-store";
+import { FormStoredElementType, GroupType, FormSchemaType } from './store';
+import { StoreActions } from 'react-simple-hook-store';
 
 export type GroupingActions = {
   addGroup: (group: GroupType) => void;
@@ -9,7 +9,7 @@ export type GroupingActions = {
   swapGroups: (index: number, newPositionIndex: number) => void;
 };
 
-export const groupingActions: StoreActions<IState, GroupingActions> = {
+export const groupingActions: StoreActions<FormSchemaType, GroupingActions> = {
   addGroup: (store, group) => {
     store.setState({
       grouping: {
@@ -40,7 +40,7 @@ export const groupingActions: StoreActions<IState, GroupingActions> = {
         ...store.state.elements.filter((el) => el.groupID !== id),
       ] as FormStoredElementType[],
     });
-    return null
+    return null;
   },
   renameGroup: (store, id, name) => {
     const groups = [...store.state.grouping.groups];
@@ -63,7 +63,7 @@ export const groupingActions: StoreActions<IState, GroupingActions> = {
         activeGroup: store.state.grouping.activeGroup,
       },
     });
-    return null
+    return null;
   },
   swapGroups: (store, oldIndex, newIndex) => {
     const groups = [...store.state.grouping.groups] as GroupType[];

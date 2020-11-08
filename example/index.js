@@ -7,7 +7,6 @@ var _1 = require("../.");
 var Element = function () {
     return React.createElement("div", null, "I am new element");
 };
-console.log(Element.name);
 var myElement = {
     render: Element,
     label: 'My Element',
@@ -24,8 +23,8 @@ var App = function () {
     };
     return (React.createElement("div", null,
         React.createElement("div", { style: { padding: 20 } },
-            React.createElement(_1.FormArchitect, { onSave: handleOnFormSave, formElements: [myElement] })),
-        formData && (React.createElement(_1.RFARenderer, { onSubmit: function (data) { return console.log(data); }, data: formData }))));
+            React.createElement(_1.FormArchitect, { onSave: handleOnFormSave })),
+        formData && (React.createElement(_1.FormRenderer, { onSubmit: function (data) { return console.log(data); }, data: formData }))));
 };
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
 //# sourceMappingURL=index.js.map

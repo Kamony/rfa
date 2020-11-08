@@ -2,7 +2,7 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { FormRenderer, FormArchitect } from '../.';
-import type { IState, FormElement } from '../.';
+import type { FormSchemaType, FormElement } from '../.';
 
 const Element = () => {
   return <div>I am new element</div>;
@@ -18,9 +18,9 @@ const myElement: FormElement = {
 };
 
 const App = () => {
-  const [formData, setFormData] = React.useState<IState>();
+  const [formData, setFormData] = React.useState<FormSchemaType>();
 
-  const handleOnFormSave = (formData: IState) => {
+  const handleOnFormSave = (formData: FormSchemaType) => {
     console.log(formData);
     setFormData(formData);
   };

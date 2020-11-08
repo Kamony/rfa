@@ -1,6 +1,6 @@
 import { useComponentStore } from '../store/componentStore';
 import React from 'react';
-import type { IState } from '..';
+import type { FormSchemaType } from '..';
 import type { ExportedDataType } from './useDataExporter';
 
 export const useRfaDataConverter = () => {
@@ -10,7 +10,7 @@ export const useRfaDataConverter = () => {
   );
 
   const dataToExport = React.useCallback(
-    (store: IState): ExportedDataType => ({
+    (store: FormSchemaType): ExportedDataType => ({
       grouping: store.grouping,
       elements: store.elements.map((element) => ({
         ...element,
@@ -20,7 +20,7 @@ export const useRfaDataConverter = () => {
     []
   );
   const dataToStore = React.useCallback(
-    (data: ExportedDataType): IState => ({
+    (data: ExportedDataType): FormSchemaType => ({
       grouping: data.grouping,
       elements: data.elements.map((element: any) => ({
         ...element,
@@ -40,7 +40,7 @@ export const useRfaDataConverter = () => {
   );
 
   const isExportedJson = React.useCallback(
-    (data: IState | ExportedDataType): data is ExportedDataType => {
+    (data: FormSchemaType | ExportedDataType): data is ExportedDataType => {
       return typeof data.elements[0].render === 'string';
     },
     []

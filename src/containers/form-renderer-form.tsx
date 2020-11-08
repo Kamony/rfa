@@ -12,11 +12,11 @@ import { useValidationCreator } from '../hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import type { FieldValues } from 'react-hook-form';
-import type { IState } from '../store/store';
+import type { FormSchemaType } from '../store/store';
 import { useFormRenderer } from '../hooks/useFormRenderer';
 
 type Props = {
-  data: IState;
+  data: FormSchemaType;
   onSubmit: (data: FieldValues) => void;
 };
 

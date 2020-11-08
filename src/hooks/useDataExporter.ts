@@ -1,11 +1,13 @@
 import React from 'react';
 import { useRfaDataConverter } from './useRfaDataConverter';
 import { useStore } from '../store/store';
-import type { IState } from '../store/store';
+import type { FormSchemaType } from '../store/store';
 
 export type ExportedDataType = {
-  grouping: IState['grouping'];
-  elements: (Omit<IState['elements'][0], 'render'> & { render: string })[];
+  grouping: FormSchemaType['grouping'];
+  elements: (Omit<FormSchemaType['elements'][0], 'render'> & {
+    render: string;
+  })[];
 };
 
 export const useDataExporter = () => {

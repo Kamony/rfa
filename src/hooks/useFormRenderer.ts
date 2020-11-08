@@ -1,9 +1,9 @@
 import React from 'react';
 
-import type { FormStoredElementType, IState } from '../store/store';
+import type { FormStoredElementType, FormSchemaType } from '../store/store';
 export type GroupedFormData = { [groupName: string]: FormStoredElementType[] };
 
-export const useFormRenderer = (data: IState) => {
+export const useFormRenderer = (data: FormSchemaType) => {
   const Elements = React.useMemo(() => data.elements, [data]);
   const Groups = React.useMemo(() => data.grouping.groups, [data]);
 

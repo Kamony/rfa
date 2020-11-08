@@ -1,15 +1,13 @@
-import * as React from 'react';
+import React from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { Button, Grid, ThemeOptions } from '@material-ui/core';
-
+import { Button, Grid } from '@material-ui/core';
 import { FieldBox } from './field-box';
 import { DropArea } from './drop-area';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import { FormElement, Validators } from '../model';
-import { IState, useStore } from '../store/store';
+import { useStore } from '../store/store';
 import {
   CheckBoxOutlined as CheckBoxIcon,
   FormatColorTextOutlined as TextInputIcon,
@@ -31,8 +29,12 @@ import {
 } from '../components/form-components';
 import { useRfaDataConverter } from '../hooks/useRfaDataConverter';
 
+import type { FormSchemaType } from '../store/store';
+import type { FormElement } from '../model';
+import type { ThemeOptions } from '@material-ui/core';
+
 type FormArchitectProps = {
-  onSave: (formData: IState) => void;
+  onSave: (formData: FormSchemaType) => void;
   theme?: ThemeOptions;
   formElements?: FormElement[];
 
@@ -88,13 +90,13 @@ export const FormArchitect = (props: FormArchitectProps) => {
         ],
         validationType: 'string',
         validators: [
-          Validators.REQUIRED,
-          Validators.MIN,
-          Validators.MAX,
-          Validators.LENGTH,
-          Validators.REGEX,
-          Validators.EMAIL,
-          Validators.URL,
+          'required',
+          'min',
+          'max',
+          'length',
+          'matches',
+          'email',
+          'url',
         ],
       },
       {
@@ -125,14 +127,14 @@ export const FormArchitect = (props: FormArchitectProps) => {
         ],
         validationType: 'number',
         validators: [
-          Validators.REQUIRED,
-          Validators.MIN,
-          Validators.MAX,
-          Validators.LESSTHAN,
-          Validators.MORETHAN,
-          Validators.POSITIVE,
-          Validators.NEGATIVE,
-          Validators.INTEGER,
+          'required',
+          'min',
+          'max',
+          'lessThan',
+          'moreThan',
+          'positive',
+          'negative',
+          'integer',
         ],
       },
       {
@@ -162,7 +164,7 @@ export const FormArchitect = (props: FormArchitectProps) => {
           },
         ],
         validationType: 'array',
-        validators: [Validators.REQUIRED],
+        validators: ['required'],
       },
       {
         name: 'radio',
@@ -191,7 +193,7 @@ export const FormArchitect = (props: FormArchitectProps) => {
           },
         ],
         validationType: 'string',
-        validators: [Validators.REQUIRED],
+        validators: ['required'],
       },
       {
         name: 'select',
@@ -220,7 +222,7 @@ export const FormArchitect = (props: FormArchitectProps) => {
           },
         ],
         validationType: 'string',
-        validators: [Validators.REQUIRED],
+        validators: ['required'],
       },
       {
         name: 'multiSelect',
@@ -249,7 +251,7 @@ export const FormArchitect = (props: FormArchitectProps) => {
           },
         ],
         validationType: 'array',
-        validators: [Validators.REQUIRED],
+        validators: ['required'],
       },
       {
         name: 'switch',
@@ -299,14 +301,14 @@ export const FormArchitect = (props: FormArchitectProps) => {
         ],
         validationType: 'number',
         validators: [
-          Validators.REQUIRED,
-          Validators.MIN,
-          Validators.MAX,
-          Validators.LESSTHAN,
-          Validators.MORETHAN,
-          Validators.POSITIVE,
-          Validators.NEGATIVE,
-          Validators.INTEGER,
+          'required',
+          'min',
+          'max',
+          'lessThan',
+          'moreThan',
+          'positive',
+          'negative',
+          'integer',
         ],
       },
       ...(props.formElements ?? []),

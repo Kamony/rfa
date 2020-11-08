@@ -4,13 +4,13 @@ import type { Theme, ThemeOptions } from '@material-ui/core';
 import { Container, CssBaseline, ThemeProvider } from '@material-ui/core';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
-import type { IState } from '../store/store';
+import type { FormSchemaType } from '../store/store';
 import { ExportedDataType } from '../hooks/useDataExporter';
 import { useRfaDataConverter } from '../hooks/useRfaDataConverter';
 import { FormRendererForm } from './form-renderer-form';
 
 type Props = {
-  data: IState | ExportedDataType;
+  data: FormSchemaType | ExportedDataType;
   onSubmit: (data: FieldValues) => void;
   theme?: ThemeOptions;
   fields?: React.FC<any>[]; // any additional fields
