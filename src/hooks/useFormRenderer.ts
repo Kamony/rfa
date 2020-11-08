@@ -1,5 +1,7 @@
-import { FormStoredElementType, IState } from "../store/store";
-import React from "react";
+import React from 'react';
+
+import type { FormStoredElementType, IState } from '../store/store';
+export type GroupedFormData = { [groupName: string]: FormStoredElementType[] };
 
 export const useFormRenderer = (data: IState) => {
   const Elements = React.useMemo(() => data.elements, [data]);
@@ -13,12 +15,12 @@ export const useFormRenderer = (data: IState) => {
   const GroupReducedElements = React.useMemo(
     () =>
       Elements.reduce((acc, el) => {
-        const key = getGroupName(el.groupID) ?? "";
+        const key = getGroupName(el.groupID) ?? '';
         return {
           ...acc,
           [key]: [...(acc[key] ?? []), el],
         };
-      }, {} as { [groupName: string]: FormStoredElementType[] }),
+      }, {} as GroupedFormData),
     [Elements, getGroupName]
   );
 

@@ -1,8 +1,9 @@
 import React from 'react';
-import { IState, useStore } from '../store/store';
-import { useComponentStore } from '../store/componentStore';
+import { useRfaDataConverter } from './useRfaDataConverter';
+import { useStore } from '../store/store';
+import type { IState } from '../store/store';
 
-type ExportedDataType = {
+export type ExportedDataType = {
   grouping: IState['grouping'];
   elements: (Omit<IState['elements'][0], 'render'> & { render: string })[];
 };
@@ -12,38 +13,19 @@ export const useDataExporter = () => {
     (s) => s,
     (a) => a.storeActions
   );
-  const [components] = useComponentStore((s) => s.components);
+
+  const {
+    handlers: { dataToStore, dataToExport },
+  } = useRfaDataConverter();
+
   const [copied, setCopied] = React.useState(false);
   const [exported, setExported] = React.useState(false);
   const [imported, setImported] = React.useState(false);
 
   const getStringData = React.useCallback(() => JSON.stringify(store), [store]);
 
-  const replaceComponentsByNames = React.useCallback(
-    (store: IState): ExportedDataType => ({
-      grouping: store.grouping,
-      elements: store.elements.map((element) => ({
-        ...element,
-        render: element.render.name,
-      })),
-    }),
-    []
-  );
-  const replaceNamesByComponent = React.useCallback(
-    (data: ExportedDataType): IState => ({
-      grouping: data.grouping,
-      elements: data.elements.map((element: any) => ({
-        ...element,
-        render:
-          components.find((component) => component.name === element.render) ??
-          (() => null),
-      })),
-    }),
-    [components]
-  );
   const saveAsJSON = React.useCallback(() => {
-    const storeToExport = replaceComponentsByNames(store);
-    console.log({ storeToExport });
+    const storeToExport = dataToExport(store);
     const stringData = JSON.stringify(storeToExport);
     let out = [];
     for (let i = 0; i < stringData.length; i++) {
@@ -80,12 +62,12 @@ export const useDataExporter = () => {
         setImported(false);
         return;
       }
-      const storeData = replaceNamesByComponent(jsonData);
+      const storeData = dataToStore(jsonData);
       storeActions.clearStore();
       storeActions.setStore(storeData);
       setImported(true);
     },
-    [storeActions, replaceNamesByComponent]
+    [storeActions, dataToStore]
   );
 
   const copyToClipboard = React.useCallback(async () => {

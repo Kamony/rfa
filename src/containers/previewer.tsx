@@ -1,7 +1,7 @@
-import React from "react";
-import {RFARenderer} from "./rfa-renderer";
-import {useStore} from "../store/store";
-import {FieldValues} from "react-hook-form";
+import React from 'react';
+import { FormRenderer } from './form-renderer';
+import { useStore } from '../store/store';
+import { FieldValues } from 'react-hook-form';
 
 export const Previewer = () => {
   const [storeData] = useStore((s) => s);
@@ -10,5 +10,5 @@ export const Previewer = () => {
     console.log({ data });
   };
 
-  return <RFARenderer data={storeData as any} onSubmit={onSubmit} />;
+  return <FormRenderer data={storeData as any} onSubmit={onSubmit} />;
 };

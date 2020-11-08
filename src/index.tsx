@@ -1,4 +1,4 @@
-export { RFARenderer } from './containers/rfa-renderer';
+export { FormRenderer } from './containers/form-renderer';
 export { FormArchitect } from './containers/formArchitect';
 export { RfaSchemaTransferer } from './containers/rfa-schema-transferer';
 

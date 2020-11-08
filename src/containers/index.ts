@@ -5,7 +5,7 @@ export { DropArea } from './drop-area';
 export { FieldBox } from './field-box';
 export { FormElementsContainer } from './form-elements-container';
 export { Previewer } from './previewer';
-export { RFARenderer } from './rfa-renderer';
+export { FormRenderer } from './form-renderer';
 
 export { FormComponentWrapper } from './form-component-wrapper';
 export { SortableWrapper } from './sortable-wrapper';

@@ -10,7 +10,6 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import { FormElement, Validators } from '../model';
 import { IState, useStore } from '../store/store';
-import { useComponentStore } from '../store/componentStore';
 import {
   CheckBoxOutlined as CheckBoxIcon,
   FormatColorTextOutlined as TextInputIcon,
@@ -30,6 +29,7 @@ import {
   Switch,
   TextInput,
 } from '../components/form-components';
+import { useRfaDataConverter } from '../hooks/useRfaDataConverter';
 
 type FormArchitectProps = {
   onSave: (formData: IState) => void;
@@ -41,10 +41,9 @@ type FormArchitectProps = {
 
 export const FormArchitect = (props: FormArchitectProps) => {
   const [store] = useStore((s) => s);
-  const [components, addComponents] = useComponentStore(
-    (s) => s.components,
-    (a) => a.addComponents
-  );
+  const {
+    handlers: { registerComponents },
+  } = useRfaDataConverter();
   const Theme = React.useMemo(
     () =>
       createMuiTheme({
@@ -315,18 +314,18 @@ export const FormArchitect = (props: FormArchitectProps) => {
     []
   );
 
+  // added any additional components to store for consecutive form data export
   React.useEffect(() => {
-    if (!props.formElements?.length) {
+    if (!props.formElements?.length || !registerComponents) {
       return;
     }
-    console.log('added components');
-    addComponents(props.formElements?.map((element) => element.render));
-  }, [props.formElements]);
+    registerComponents(props.formElements?.map((element) => element.render));
+  }, [props.formElements, registerComponents]);
 
   const handleSave = React.useCallback(() => {
     props.onSave(store);
   }, [store]);
-  console.log({ components, store });
+
   return (
     <DndProvider backend={HTML5Backend}>
       <ThemeProvider theme={Theme}>
@@ -342,11 +341,6 @@ export const FormArchitect = (props: FormArchitectProps) => {
             <FieldBox formElements={formElements} />
           </Grid>
         </Grid>
-        {components.length === 9 && (
-          <div style={{ background: 'red', minWidth: 200, minHeight: 200 }}>
-            {React.createElement(components[8])}
-          </div>
-        )}
       </ThemeProvider>
     </DndProvider>
   );

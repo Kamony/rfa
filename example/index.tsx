@@ -1,10 +1,21 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { RFARenderer } from '../.';
-import { FormArchitect } from '../.';
+import { FormRenderer, FormArchitect } from '../.';
+import type { IState, FormElement } from '../.';
 
-import type { IState } from '../.';
+const Element = () => {
+  return <div>I am new element</div>;
+};
+
+const myElement: FormElement = {
+  render: Element,
+  label: 'My Element',
+  name: 'myElement',
+  icon: <div />,
+  attributes: [],
+  validationType: 'string',
+};
 
 const App = () => {
   const [formData, setFormData] = React.useState<IState>();
@@ -20,7 +31,7 @@ const App = () => {
         <FormArchitect onSave={handleOnFormSave} />
       </div>
       {formData && (
-        <RFARenderer onSubmit={(data) => console.log(data)} data={formData} />
+        <FormRenderer onSubmit={(data) => console.log(data)} data={formData} />
       )}
     </div>
   );
