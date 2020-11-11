@@ -1,7 +1,7 @@
 import React from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Box } from '@material-ui/core';
 import { FieldBox } from './field-box';
 import { DropArea } from './drop-area';
 import CssBaseline from '@material-ui/core/CssBaseline';
