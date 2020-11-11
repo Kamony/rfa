@@ -335,14 +335,21 @@ export const FormArchitect = (props: FormArchitectProps) => {
         <Grid container direction={'row'} spacing={1} justify={'center'}>
           <Grid item xs={9}>
             <DropArea />
-            <Button variant={'contained'} onClick={handleSave}>
-              Save Form
-            </Button>
           </Grid>
           <Grid item xs={3}>
             <FieldBox formElements={formElements} />
           </Grid>
         </Grid>
+        <Box marginTop={1}>
+          <Button
+            color={'primary'}
+            variant={'contained'}
+            onClick={handleSave}
+            disabled={!store.elements.length}
+          >
+            Save Form
+          </Button>
+        </Box>
       </ThemeProvider>
     </DndProvider>
   );
