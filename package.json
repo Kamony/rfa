@@ -21,7 +21,8 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "docs": "cd docs | bundle exec jekyll serve"
   },
   "peerDependencies": {
     "react": ">=16"

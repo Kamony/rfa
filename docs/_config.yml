@@ -24,6 +24,7 @@ github_username:  kamony
 header_pages:
   - installation.md
   - components.md
+  - examples.md
   - about.md
 # Build settings
 markdown: kramdown
