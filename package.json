@@ -1,8 +1,10 @@
 {
   "name": "rfa",
   "author": "Jiri Hauser",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
+  "homepage": "https://github.com/Kamony/rfa",
+  "keywords": ["form", "form-builder", "form-architect", "dynamic-form", "react-forms", "validations", "user", "user-defined-form", "typescript-form", "material-ui-form"],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
