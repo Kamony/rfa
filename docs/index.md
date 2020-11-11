@@ -4,6 +4,23 @@
 layout: home
 ---
 
+<style type="text/css">
+.iframe_container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 - this is responsive by adjusting the hight according to the width! */
+    padding-top: 25px;
+    height: 0;
+}
+
+.iframe_container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+
 **React Form Architect** is an ultimate solution for creating and rendering forms in React. 
 Its main focus is to provide users with a tool to define, render and share a form in a browser.
 
@@ -37,13 +54,20 @@ RFA works pretty well with NoSql databases for creating dynamic data types.
 Use [Form Architect](components#form-architect) to create form, edit, group and order form fields and set validations.
 Upon completion generate form schema.  
 
-![](rfa-example.gif)
 ## Render Form
 Use form schema to render a form for your users using [Form Renderer](components#form-renderer).
  Define what to do with fill out data. That's it. No other actions needed.
 
-
-
+## Try it out!
+open example in a [new window](https://nnsrp.csb.app/) to overcome limitations of this example iframe
+<div class="iframe_container">
+    <iframe src="https://codesandbox.io/embed/twilight-mountain-nnsrp?fontsize=8&hidenavigation=1&theme=light&view=preview"
+         style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+         title="twilight-mountain-nnsrp"
+         allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+         sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+       ></iframe>
+</div>
 
 Make your [First Steps](installation) with **RFA**
 {: style="font-size: 120%; text-align: center; margin-top: 100px"}

@@ -8,6 +8,7 @@ permalink: /examples/
     position: relative;
     padding-bottom: 56.25%; /* 16:9 - this is responsive by adjusting the hight according to the width! */
     padding-top: 25px;
+    margin-bottom: 25px;
     height: 0;
 }
 
@@ -24,6 +25,8 @@ permalink: /examples/
 2. [Extending Form Elements](#extending-form-elements)
 
 # Theming
+[See it live](https://codesandbox.io/s/beautiful-neumann-trpsz?file=/src/App.tsx)
+
 Define a [Material UI Theme](https://material-ui.com/customization/default-theme/) and pass it to `theme` prop of [Form Renderer](components#form-renderer) and [Form Architect](components#form-architect)
 ~~~ tsx
 const myTheme = {
@@ -43,11 +46,9 @@ const myTheme = {
 <FormRenderer {...props} theme={myTheme} />
 ~~~
 
-<div class="iframe_container">
-  <iframe src="http://www.youtube.com/embed/E-ONNjFoOx0" frameborder="0" allowfullscreen="allowfullscreen"> </iframe>
-</div>
-
 # Extending Form Elements
+[See it live](https://codesandbox.io/s/practical-bose-x4h78?file=/src/App.tsx)
+
 To add a component to [Form Architect](components#form-architect) define a [FormElement](#formelement) and pass component as its `render` property.
 Pass created `FormElement` as an array to `formElements` prop. 
 
