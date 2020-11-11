@@ -1,13 +1,14 @@
 import React from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { Button, Grid, Box } from '@material-ui/core';
+import type { ThemeOptions } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { FieldBox } from './field-box';
 import { DropArea } from './drop-area';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import { useStore } from '../store/store';
+import type { FormSchemaType } from '../store/store';
 import {
   CheckBoxOutlined as CheckBoxIcon,
   FormatColorTextOutlined as TextInputIcon,
@@ -28,10 +29,8 @@ import {
   TextInput,
 } from '../components/form-components';
 import { useRfaDataConverter } from '../hooks/useRfaDataConverter';
-
-import type { FormSchemaType } from '../store/store';
 import type { FormElement } from '../model';
-import type { ThemeOptions } from '@material-ui/core';
+import { FormArchitectSaveButton } from '../components/FormArchitectSaveButton';
 
 type FormArchitectProps = {
   onSave: (formData: FormSchemaType) => void;
@@ -42,7 +41,6 @@ type FormArchitectProps = {
 };
 
 export const FormArchitect = (props: FormArchitectProps) => {
-  const [store] = useStore((s) => s);
   const {
     handlers: { registerComponents },
   } = useRfaDataConverter();
@@ -318,15 +316,11 @@ export const FormArchitect = (props: FormArchitectProps) => {
 
   // added any additional components to store for consecutive form data export
   React.useEffect(() => {
-    if (!props.formElements?.length || !registerComponents) {
+    if (!props.formElements?.length) {
       return;
     }
     registerComponents(props.formElements?.map((element) => element.render));
-  }, [props.formElements, registerComponents]);
-
-  const handleSave = React.useCallback(() => {
-    props.onSave(store);
-  }, [store]);
+  }, [props.formElements]);
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -341,14 +335,7 @@ export const FormArchitect = (props: FormArchitectProps) => {
           </Grid>
         </Grid>
         <Box marginTop={1}>
-          <Button
-            color={'primary'}
-            variant={'contained'}
-            onClick={handleSave}
-            disabled={!store.elements.length}
-          >
-            Save Form
-          </Button>
+          <FormArchitectSaveButton onSave={props.onSave} />
         </Box>
       </ThemeProvider>
     </DndProvider>
