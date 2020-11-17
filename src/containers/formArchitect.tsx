@@ -17,6 +17,7 @@ import {
   MenuOpenOutlined as SelectIcon,
   RadioButtonCheckedOutlined as RadioIcon,
   ToggleOnOutlined as SwitchIcon,
+  AccountTreeOutlined as TreeIcon,
 } from '@material-ui/icons';
 import {
   CheckBox,
@@ -31,6 +32,7 @@ import {
 import { useRfaDataConverter } from '../hooks/useRfaDataConverter';
 import type { FormElement } from '../model';
 import { FormArchitectSaveButton } from '../components/FormArchitectSaveButton';
+import { TreeBuilder } from '../components/tree/TreeBuilder';
 
 type FormArchitectProps = {
   onSave: (formData: FormSchemaType) => void;
@@ -307,6 +309,50 @@ export const FormArchitect = (props: FormArchitectProps) => {
           'positive',
           'negative',
           'integer',
+        ],
+      },
+      {
+        name: 'root',
+        label: 'Tree',
+        icon: <TreeIcon color={'secondary'} />,
+        render: TreeBuilder,
+        validationType: 'object',
+        attributes: [
+          {
+            name: 'label',
+            type: 'input',
+            label: 'tree title',
+            value: 'Taxonomy of..',
+          },
+          {
+            name: 'nodeLabel',
+            type: 'input',
+            label: 'tree node label',
+            value: 'node name',
+          },
+          {
+            name: 'placeholder',
+            type: 'input',
+            label: 'tree node label placeholder',
+            value: 'eg. Cyanobacteria',
+          },
+          {
+            name: 'data',
+            type: 'keyValueData',
+            label: 'tree node payload',
+            keyValueData: [
+              { name: 'species', placeholder: 'vulpes vulpes' },
+              { name: 'genus', placeholder: 'vulpes' },
+              { name: 'phylum', placeholder: 'chordata' },
+              { name: 'class', placeholder: 'mammalia' },
+            ],
+          },
+          {
+            name: 'allowUserToDefineData',
+            type: 'switch',
+            label: 'Allow user to add more data',
+            value: false,
+          },
         ],
       },
       ...(props.formElements ?? []),
