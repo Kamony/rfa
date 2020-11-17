@@ -7,7 +7,7 @@ layout: home
 <style type="text/css">
 .iframe_container {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 - this is responsive by adjusting the hight according to the width! */
+    padding-bottom: 56.25%; /* 16:9 - this is responsive by adjusting the height according to the width! */
     padding-top: 25px;
     height: 0;
 }
@@ -24,12 +24,12 @@ layout: home
 **React Form Architect** is an ultimate solution for creating and rendering forms in React. 
 Its main focus is to provide users with a tool to define, render and share a form in a browser.
 
-All in a way that can be done by any non-programming being.
+All in a way that can be done by a non-programming being in a plug and play way without an extensive configuration.
 
 ## Motivation
-**RFA** was created for naturalists to define the data types of their findings using a form.
+**RFA** was created for scientists to define the data types of their findings using a form.
  Other researchers can then add defined findings by filling out the form. All done in a browser without the need of any additional programming work.
-Check out [UniCatDB](https://www.unicatdb.org/) for real-life usage.
+Check out [UniCatDB](https://www.unicatdb.org/) for real-life usage. There is the [Tree](tree) form field added especially for scientists for working with tree-structured data.
 
 Due to the dynamic nature of the solution, **RFA** will also find much wider use in any environment where form needs to be created and/or rendered. 
 
@@ -47,6 +47,7 @@ RFA works pretty well with NoSql databases for creating dynamic data types.
 * **Full package** - define form using [Form Architect](components#form-architect) and render form using [Form Renderer](components#form-renderer).
 * **Decoupled functionality** - [create form](components#form-architect) in one place and [render](components#form-renderer) it elsewhere (even in different project, computer, planet).
 * **Serverless** - all magic is happening on the frontend.
+* **Science** ready - added functionality especially for scientists for working with tree-structured data ([Tree](tree)).
 * Built using **modern stack** - React with hooks, Typescript, React Hook Form, Yup, Material-UI
 * Made with **love** 
 

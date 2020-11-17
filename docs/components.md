@@ -6,6 +6,11 @@ permalink: /components/
 
 **RFA** provides components for building a form and for rendering a form.
 
+1. [Form Architect](#form-architect)
+2. [Form Renderer](#form-renderer)
+3. [Tree](#tree)
+4. [Typescript types](#common-types)
+
 ## Form Architect
 
 # Basic Usage
@@ -42,7 +47,7 @@ type FormArchitectProps = {
 | name | type | required | description |
 |:--------|:-------:|--------:| --------:|
 | onSave   | (formData: [FormSchemaType](#formschematype)) => void   | true   | Action on `save form` button. FormData is passed as parameter.|
-| theme   | ThemeOptions   | false   | Adjusts styles of React Architect. Refer to [Material UI theming](https://material-ui.com/customization/default-theme/).|
+| theme   | ThemeOptions   | false   | Adjusts styles. Refer to [Material UI theming](https://material-ui.com/customization/default-theme/).|
 |----
 | formElements   | [FormElement](#formelement)[]   | false   | Specifies additional form fields.|
 |=====
@@ -85,11 +90,46 @@ type FormRendererProps = {
 |:--------|:-------:|--------:| --------:|
 | data   | [FormSchemaType](#formschematype) or [ExportedSchemaType](#exportedschematype) | true | Form schema to render form provided directly from [Form Architect](#form-architect)([FormSchemaType](#formschematype)) or as JSON([ExportedSchemaType](#exportedschematype)) |
 | onSubmit   | (data: [FieldValues](#fieldvalues)) => void   | true   | Function to be called on submitting form. Takes filled data as first parameter. |
-| theme   | ThemeOptions   | false   | Adjusts styles of React Architect. Refer to [Material UI theming](https://material-ui.com/customization/default-theme/).|
+| theme   | ThemeOptions   | false   | Adjusts styles. Refer to [Material UI theming](https://material-ui.com/customization/default-theme/).|
 |----
 | fields   | React.FC<any>[]   | false   | Specifies additional form fields to render if `data` includes any extended [FormElements](#formelement)|
 |=====
 
+## Tree
+Component for displaying tree-structured data.
+
+# Basic Usage
+~~~ ts
+import { Tree } from 'rfa';
+import type { TreeNodeType } from 'rfa';
+
+const TreeData: TreeNodeType = {
+  name: 'Root Node',
+  descendents: [
+    {
+        name: 'child node'
+    }
+  ],
+}
+
+const App = () => {
+  return <Tree node={TreeData} />
+};
+~~~
+
+# Props
+~~~ ts
+type TreeProps = {
+  node: TreeNodeType;
+  theme?: ThemeOptions;
+};
+~~~
+
+| name | type | required | description |
+|:--------|:-------:|--------:| --------:|
+| node   | [TreeNodeType](#treenodetype) | true | Schema to render tree with |
+| theme   | ThemeOptions   | false   | Adjusts styles. Refer to [Material UI theming](https://material-ui.com/customization/default-theme/).|
+|=====
 
 ## Common Types
 
@@ -111,11 +151,16 @@ type FormElement = {
 ~~~ ts
 export type AttributeSchema = {
   name: string; // name of attribute
-  type: 'input' | 'select' | 'radio' | 'switch' | 'checkbox' | 'options'; // for editing purposes of attribute
+  type: 'input' | 'select' | 'radio' | 'switch' | 'checkbox' | 'options' | 'keyValueData'; // for editing purposes of attribute
   label: string; // label in attribute editor
   value?: string | number | boolean | string[]; // default value of attribute
   options?: { //specify options for checkboxed, selects, etc.
     name: string;
+  }[];
+  keyValueData?: { //specify options for key value data (string:input)
+    name: string; // name of key (key)
+    placeholder?: string; // placeholder of input (value)
+    value?: string; // value of input (value)
   }[];
 };
 
@@ -138,7 +183,7 @@ const placeholderAttr = {
 
 specifies [yup](https://github.com/jquense/yup#api) validation type upon to build dynamic schema
 ~~~ ts
-type ValidationType = 'string' | 'number' | 'array' | 'boolean'; //for setting validations
+type ValidationType = 'string' | 'number' | 'array' | 'boolean' | 'object'; //for setting validations
 ~~~
 
 # Validators
@@ -185,4 +230,15 @@ type ExportedSchemaType = {
 specified by `react-hook-form`.
 ~~~ ts
 type FieldValues = Record<string, any>;
+~~~
+
+# TreeNodeType
+Cornerstone of tree, specifies tree node and ancestors recursively 
+~~~ ts
+type TreeNodeType = {
+  name: string; // label of node
+  data?: { [key: string]: string }; // key value data to display as payload
+  descendents?: TreeNodeType[]; // array of descendents 
+  userData?: { name: string; value: string }[]; // any custom data added by user, when additional data is unlocked for user
+};
 ~~~
