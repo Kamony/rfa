@@ -1,11 +1,11 @@
-import React from "react";
-import { TreeNodeInput, TreeNodeInputProps } from "./TreeNode/TreeNodeInput";
+import React from 'react';
+import { TreeNodeInput, TreeNodeInputProps } from './TreeNode/TreeNodeInput';
 import {
   FormContextType,
   FormControlType,
-} from "../../types/common-form-components-types";
-import { uuid } from "../../utils/uuid";
-import { FormLabel } from "@material-ui/core";
+} from '../../types/common-form-components-types';
+import { uuid } from '../../utils/uuid';
+import { FormLabel } from '@material-ui/core';
 
 type TreeBuilderProps = TreeNodeInputProps &
   FormContextType &
@@ -28,16 +28,16 @@ export const TreeBuilder = ({
   ...treeNode
 }: TreeBuilderProps) => {
   return (
-    <div style={{ border: "1px transparent solid" }}>
+    <div style={{ border: '1px transparent solid' }}>
       <FormLabel>{label}</FormLabel>
       <TreeNodeInput
+        {...treeNode}
         id={uuid()}
         formContext={{
           name,
           register,
           control,
         }}
-        {...treeNode}
       />
     </div>
   );
