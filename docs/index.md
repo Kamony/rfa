@@ -60,7 +60,7 @@ Use form schema to render a form for your users using [Form Renderer](components
  Define what to do with fill out data. That's it. No other actions needed.
 
 ## Try it out!
-open example in a [new window](https://nnsrp.csb.app/) to overcome limitations of this example iframe
+open example in a [new window](https://nnsrp.csb.app/) to overcome limitations of this example iframe (drag and drop doesn't work)
 <div class="iframe_container">
     <iframe src="https://codesandbox.io/embed/twilight-mountain-nnsrp?fontsize=8&hidenavigation=1&theme=light&view=preview"
          style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
