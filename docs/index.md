@@ -21,7 +21,7 @@ layout: home
 }
 </style>
 
-**React Form Architect** is an ultimate solution for creating and rendering forms in React. 
+**React Form Architect** is a solution for creating and rendering forms in React. 
 Its main focus is to provide users with a tool to define, render and share a form in a browser.
 
 All in a way that can be done by a non-programming being in a plug and play way without an extensive configuration.
