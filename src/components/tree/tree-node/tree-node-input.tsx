@@ -7,10 +7,8 @@ import {
   makeStyles,
   createStyles,
 } from '@material-ui/core';
-// import {  } from "@material-ui/styles";
 import { useIntersectionObserver } from '../../../hooks/use-intersection-observer';
 import { TreeNodeTitleInput } from '../tree-node-title/tree-node-title-input';
-import { TreeNodeType } from './tree-node';
 import { TreeNodeDataInput } from '../tree-node-data/tree-node-data-input';
 import {
   FormContextType,
@@ -22,14 +20,20 @@ import { NodeTitleAnchor } from '../node-title-anchor';
 import { TreeNodeCornerButton } from '../tree-node-corner-button';
 import { useClientRect } from '../../../hooks/use-client-rect';
 
-export type TreeNodeInputProps = {
+export type TreeNodeInputPayload = { name: string; value: any }[];
+
+export type TreeNodeInputType = {
   id: string;
+  label: string;
+  descendents?: TreeNodeInputType[];
+  data?: TreeNodeInputPayload;
+};
+
+export type TreeNodeInputProps = TreeNodeInputType & {
   formContext: FormContextType & FormControlType;
   isEndingNode?: boolean;
   level?: number;
   allowUserToDefineData?: boolean;
-  data?: TreeNodeType['data'];
-  descendents?: TreeNodeType['descendents'];
   nodeLabel?: string;
   required?: boolean;
   onDelete?: (id: string) => void;
@@ -51,7 +55,7 @@ export const TreeNodeInput = ({
   const classes = useStyles();
   const [isOpen, setIsOpen] = React.useState(true);
   const [childNodes, setChildNodes] = React.useState<
-    TreeNodeType['descendents']
+    TreeNodeInputType['descendents']
   >();
   const hasDescendents = React.useMemo(
     () => !!(descendents?.length || childNodes?.length),
@@ -215,7 +219,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       position: 'relative',
       padding: theme.spacing(2, 0, 2, 5),
-      marginTop: theme.spacing(1),
     },
     node: {
       position: 'relative',

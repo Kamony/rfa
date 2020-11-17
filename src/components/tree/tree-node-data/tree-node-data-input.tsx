@@ -7,12 +7,12 @@ import {
   makeStyles,
   Theme,
   Typography,
-} from "@material-ui/core";
-import React from "react";
-import { FormContextType } from "../../../types/common-form-components-types";
-import { KeyValueData } from "../../../model";
-import { uuid } from "../../../utils/uuid";
-import { Add, Clear } from "@material-ui/icons";
+} from '@material-ui/core';
+import React from 'react';
+import { FormContextType } from '../../../types/common-form-components-types';
+import { KeyValueData } from '../../../model';
+import { uuid } from '../../../utils/uuid';
+import { Add, Clear } from '@material-ui/icons';
 
 type TreeNodeDataInputProps = {
   data?: KeyValueData[];
@@ -35,7 +35,7 @@ export const TreeNodeDataInput = ({
     setCustomDataObj((prevState) => ({
       ...prevState,
       ...{
-        [uuid()]: "",
+        [uuid()]: '',
       },
     }));
   }, []);
@@ -59,7 +59,7 @@ export const TreeNodeDataInput = ({
       {data?.map((payloadEntry, index) => (
         <Box className={classes.payloadEntry} key={index}>
           <Typography
-            variant={"caption"}
+            variant={'caption'}
             className={classes.payloadCaption}
           >{`${payloadEntry.name}:`}</Typography>
           {payloadEntry.value ? (
@@ -68,9 +68,9 @@ export const TreeNodeDataInput = ({
             <Input
               inputRef={formContext.register}
               name={`${formContext.name}.data.${payloadEntry.name}`}
-              defaultValue={payloadEntry.value ?? ""}
-              placeholder={payloadEntry.placeholder ?? ""}
-              inputProps={{ "aria-label": "description" }}
+              defaultValue={payloadEntry.value ?? ''}
+              placeholder={payloadEntry.placeholder ?? ''}
+              inputProps={{ 'aria-label': 'description' }}
             />
           )}
         </Box>
@@ -83,24 +83,24 @@ export const TreeNodeDataInput = ({
               <Input
                 className={classes.payloadCaption}
                 inputRef={formContext.register}
-                name={`${formContext.name}.data.userDefined[${index}].name`}
-                inputProps={{ "aria-label": "name" }}
-                endAdornment={":"}
-                placeholder={"name"}
+                name={`${formContext.name}.userData[${index}].name`}
+                inputProps={{ 'aria-label': 'name' }}
+                endAdornment={':'}
+                placeholder={'name'}
                 autoFocus={true}
               />
               <Input
                 inputRef={formContext.register}
-                name={`${formContext.name}.data.userDefined[${index}].value`}
-                placeholder={"value"}
-                inputProps={{ "aria-label": "description" }}
+                name={`${formContext.name}.userData[${index}].value`}
+                placeholder={'value'}
+                inputProps={{ 'aria-label': 'description' }}
               />
               <IconButton
                 aria-label="delete"
                 onClick={removeCustomData(id)}
-                size={"small"}
+                size={'small'}
               >
-                <Clear color={"error"} fontSize={"small"} />
+                <Clear color={'error'} fontSize={'small'} />
               </IconButton>
             </Box>
           );
@@ -108,11 +108,11 @@ export const TreeNodeDataInput = ({
       {allowUserDefinedData && (
         <Box className={classes.actionArea}>
           <Button
-            variant={"outlined"}
-            color={"secondary"}
+            variant={'outlined'}
+            color={'secondary'}
             onClick={addCustomData}
             startIcon={<Add />}
-            size={"small"}
+            size={'small'}
           >
             data entry
           </Button>
@@ -129,17 +129,17 @@ const useStyles = makeStyles((theme: Theme) =>
       width: theme.spacing(13),
     },
     payloadEntry: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
       borderBottomWidth: 1,
-      borderBottomStyle: "solid",
-      borderBottomColor: theme.palette.grey["200"],
+      borderBottomStyle: 'solid',
+      borderBottomColor: theme.palette.grey['200'],
     },
     actionArea: {
       marginTop: theme.spacing(1),
-      display: "flex",
-      justifyContent: "center",
+      display: 'flex',
+      justifyContent: 'center',
     },
   })
 );

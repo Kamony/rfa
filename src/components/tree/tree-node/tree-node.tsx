@@ -8,38 +8,38 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { NodeTitleAnchor } from '../node-title-anchor';
+import { theme } from '../../../theme';
 import { useIntersectionObserver } from '../../../hooks/use-intersection-observer';
-import { TreeExpandButton } from '../tree-expand-button';
+import { useClientRect } from '../../../hooks/use-client-rect';
+import { NodeTitleAnchor } from '../node-title-anchor';
 import { TreeNodeTitle } from '../tree-node-title/tree-node-title';
-import { TreeNodeTitleInput } from '../tree-node-title/tree-node-title-input';
+import { TreeNodeCornerButton } from '../tree-node-corner-button';
 
-export type TreeNodePayload = { name: string; value: any }[];
+export type TreeNodePayload = { [key: string]: string };
 
 export type TreeNodeType = {
-  id: string;
-  label: string;
+  name: string;
   descendents?: TreeNodeType[];
   data?: TreeNodePayload;
+  userData?: { name: string; value: string }[];
 };
 
 type Props = {
   node: TreeNodeType;
   isEndingNode?: boolean;
   level?: number;
-  isEditMode?: boolean;
+
   children?: never;
 };
 
-export const TreeNode = ({
-  node,
-  isEditMode,
-  isEndingNode = false,
-  level = 1,
-}: Props) => {
+export const TreeNode = ({ node, isEndingNode = false, level = 1 }: Props) => {
   const classes = useStyles();
-  const [isOpen, setIsOpen] = React.useState(false);
-  const hasDescendents = React.useMemo(() => node.descendents?.length, [
+  const [isOpen, setIsOpen] = React.useState(true);
+
+  const { ref, isSticky } = useIntersectionObserver();
+  const [nodeRect, nodeRef, nodeElement] = useClientRect();
+
+  const hasDescendents = React.useMemo(() => !!node.descendents?.length, [
     node.descendents,
   ]);
   const toggleDescendents = React.useCallback(() => {
@@ -48,18 +48,12 @@ export const TreeNode = ({
     }
     setIsOpen((prevState) => !prevState);
   }, [hasDescendents]);
-
-  const { ref, isSticky } = useIntersectionObserver();
-
   const scrollToNode = React.useCallback(() => {
-    if (!nodeRef.current) {
+    if (!nodeElement) {
       return;
     }
-
-    nodeRef.current.scrollIntoView({ behavior: 'smooth' });
-  }, []);
-
-  const nodeRef = React.useRef<HTMLDivElement>();
+    nodeElement.scrollIntoView({ behavior: 'smooth' });
+  }, [nodeElement]);
 
   return (
     <>
@@ -74,67 +68,64 @@ export const TreeNode = ({
               style={{
                 height: !isEndingNode
                   ? '100%'
-                  : (nodeRef.current?.offsetHeight ?? 2) / 2,
+                  : (nodeRect?.height ?? 2) / 2 + theme.spacing(2),
               }}
             />
             <div
               className={classes.edgeHor}
-              style={{ top: (nodeRef.current?.offsetHeight ?? 2) / 2 }}
+              style={{ top: (nodeRect?.height ?? 2) / 2 + theme.spacing(2) }}
             />
           </div>
         )}
         <NodeTitleAnchor
           visible={!!(isSticky && hasDescendents && isOpen)}
-          title={node.label}
+          title={node.name}
           onClick={scrollToNode}
         />
         <Paper variant={'outlined'} className={classes.node} innerRef={nodeRef}>
-          {/* Node Title */}
-          {/*<Typography*/}
-          {/*  color={"primary"}*/}
-          {/*  variant={"h6"}*/}
-          {/*  gutterBottom={!!node.data}*/}
-          {/*>*/}
-          {/*  {node.label}*/}
-          {/*</Typography>*/}
-          {isEditMode ? (
-            <TreeNodeTitleInput />
-          ) : (
-            <TreeNodeTitle
-              editMode={!!isEditMode}
-              label={node.label}
-              gutterBottom={!!node.data}
+          <TreeNodeTitle label={node.name} gutterBottom={!!node.data} />
+
+          {hasDescendents && (
+            <TreeNodeCornerButton
+              onClick={toggleDescendents}
+              icon={isOpen ? 'expandLess' : 'expandMore'}
+              corner={'bottomLeft'}
+              color={'action'}
             />
           )}
-
           <div ref={ref} />
           {/* Node Content */}
-          {node.data?.map((payloadEntry, index) => (
+          {node.data &&
+            Object.entries(node.data).map(([name, value], index) => (
+              <Box className={classes.payloadEntry} key={index}>
+                <Typography
+                  variant={'caption'}
+                  className={classes.payloadCaption}
+                >{`${name}:`}</Typography>
+                <Typography variant={'body2'}>{value}</Typography>
+              </Box>
+            ))}
+          {node.userData?.map((dataEntry, index) => (
             <Box className={classes.payloadEntry} key={index}>
               <Typography
                 variant={'caption'}
                 className={classes.payloadCaption}
-              >{`${payloadEntry.name}:`}</Typography>
-              <Typography variant={'body2'}>{payloadEntry.value}</Typography>
+              >{`${dataEntry.name}:`}</Typography>
+              <Typography variant={'body2'}>{dataEntry.value}</Typography>
             </Box>
           ))}
-          {hasDescendents && (
-            <TreeExpandButton isOpen={isOpen} onClick={toggleDescendents} />
-          )}
         </Paper>
         {/* Node Descendents */}
-        {hasDescendents && (
-          <Collapse in={isOpen}>
-            {node.descendents!.map((descendant, index) => (
-              <TreeNode
-                node={descendant}
-                level={++level}
-                key={descendant.id}
-                isEndingNode={node.descendents?.length === index + 1}
-              />
-            ))}
-          </Collapse>
-        )}
+        <Collapse in={isOpen}>
+          {node.descendents?.map((descendant, index) => (
+            <TreeNode
+              key={index}
+              node={descendant}
+              level={++level}
+              isEndingNode={node.descendents?.length === index + 1}
+            />
+          ))}
+        </Collapse>
       </div>
     </>
   );
@@ -146,7 +137,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       top: 0,
       bottom: 0,
-      left: theme.spacing(2),
+      left: 0,
       width: theme.spacing(5),
       zIndex: 0,
     },
@@ -162,11 +153,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     root: {
       position: 'relative',
-      padding: theme.spacing(1, 0, 1, 5),
+      padding: theme.spacing(2, 0, 2, 5),
     },
     node: {
       position: 'relative',
-      padding: theme.spacing(1),
+      padding: theme.spacing(2),
       display: 'flex',
       flexDirection: 'column',
       width: 'fit-content',

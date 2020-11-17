@@ -1,15 +1,15 @@
-import React from "react";
-import { createStyles, IconProps, Theme, makeStyles } from "@material-ui/core";
-import { Remove, Add, ExpandMore, ExpandLess } from "@material-ui/icons";
-import { theme } from "../../theme";
+import React from 'react';
+import { createStyles, IconProps, Theme, makeStyles } from '@material-ui/core';
+import { Remove, Add, ExpandMore, ExpandLess } from '@material-ui/icons';
+import { theme } from '../../theme';
 type Props = {
   onClick: () => void;
-  icon: "add" | "remove" | "expandMore" | "expandLess";
-  corner: "topRight" | "bottomLeft" | "bottomRight";
-  color: IconProps["color"];
+  icon: 'add' | 'remove' | 'expandMore' | 'expandLess';
+  corner: 'topRight' | 'bottomLeft' | 'bottomRight';
+  color: IconProps['color'];
 };
 
-const iconMapper: Record<Props["icon"], React.FC<any>> = {
+const iconMapper: Record<Props['icon'], React.FC<any>> = {
   remove: Remove,
   add: Add,
   expandMore: ExpandMore,
@@ -19,7 +19,7 @@ const iconMapper: Record<Props["icon"], React.FC<any>> = {
 export const TreeNodeCornerButton = ({
   corner,
   icon,
-  color = "inherit",
+  color = 'inherit',
   onClick,
 }: Props) => {
   const classes = useStyles();
@@ -35,7 +35,7 @@ export const TreeNodeCornerButton = ({
       <div
         className={classes.button}
         style={{
-          borderColor: theme.palette.grey["300"],
+          borderColor: theme.palette.grey['300'],
         }}
         onClick={handleClick}
       >
@@ -50,32 +50,35 @@ const useStyles = makeStyles((theme: Theme) =>
     button: {
       height: theme.spacing(size),
       width: theme.spacing(size),
-      cursor: "pointer",
+      cursor: 'pointer',
       borderRadius: theme.shape.borderRadius,
       backgroundColor: theme.palette.background.default,
       borderWidth: 1,
-      borderStyle: "solid",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      "&:hover": {
+      borderStyle: 'solid',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      '&:hover': {
         backgroundColor: theme.palette.grey.A100,
       },
     },
     topRight: {
-      position: "absolute",
+      position: 'absolute',
       top: -theme.spacing(size) / 2,
       right: -theme.spacing(size) / 2,
+      zIndex: 10,
     },
     bottomLeft: {
-      position: "absolute",
+      position: 'absolute',
       bottom: -theme.spacing(size) / 2,
       left: -theme.spacing(size) / 2,
+      zIndex: 10,
     },
     bottomRight: {
-      position: "absolute",
+      position: 'absolute',
       bottom: -theme.spacing(size) / 2,
       right: -theme.spacing(size) / 2,
+      zIndex: 10,
     },
   })
 );
