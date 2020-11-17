@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { uuid } from "../utils/uuid";
-import { useStore } from "../store/store";
+import { uuid } from '../utils/uuid';
+import { useStore } from '../store/store';
 
 export const useNameGenerator = () => {
   const [elements] = useStore((s) => s.elements);
@@ -16,7 +16,7 @@ export const useNameGenerator = () => {
 
   const createName = React.useCallback(
     (label: string) => {
-      const cleanName = label.trim().replace(" ", "").toLowerCase();
+      const cleanName = label.trim().replace(/\s+/g, '_').toLowerCase();
       return isUniqueName(cleanName) ? cleanName : `${cleanName}-${uuid()}`;
     },
     [isUniqueName]
@@ -26,7 +26,7 @@ export const useNameGenerator = () => {
     (id: string) => {
       const element = elements.find((el) => el.id === id);
       if (!element) {
-        return "";
+        return '';
       }
       return createName(element.label);
     },
