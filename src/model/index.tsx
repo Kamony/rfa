@@ -20,14 +20,33 @@ export type OptionType = {
 
 export type AttributeValueType = string | number | boolean | string[];
 
+export type KeyValueData = {
+  name: string;
+  placeholder?: string;
+  value?: string;
+};
+
 export type AttributeSchema = {
   name: string;
-  type: 'input' | 'select' | 'radio' | 'switch' | 'checkbox' | 'options'; // for editing purposes of attribute
+  type:
+    | 'input'
+    | 'select'
+    | 'radio'
+    | 'switch'
+    | 'checkbox'
+    | 'options'
+    | 'keyValueData'; // for editing purposes of attribute
   label: string;
   value?: AttributeValueType;
   options?: OptionType[];
+  keyValueData?: KeyValueData[];
 };
-export type ValidationType = 'string' | 'number' | 'array' | 'boolean'; //for setting validations
+export type ValidationType =
+  | 'string'
+  | 'number'
+  | 'array'
+  | 'boolean'
+  | 'object'; //for setting validations
 
 export type Validation = {
   type: string;

@@ -1,8 +1,8 @@
-import React from "react";
-import { useStore } from "../store/store";
-import { useNameGenerator } from "./useNameGenerator";
-import { FormElement } from "../model";
-import { uuid } from "../utils/uuid";
+import React from 'react';
+import { useStore } from '../store/store';
+import { useNameGenerator } from './useNameGenerator';
+import { FormElement } from '../model';
+import { uuid } from '../utils/uuid';
 
 export const useFormElements = () => {
   const [elements, actions] = useStore(
@@ -34,15 +34,24 @@ export const useFormElements = () => {
     (formElement: FormElement) => {
       const id = uuid();
       const attrs = formElement.attributes.reduce((accumulator, attrObj) => {
-        return attrObj.options && attrObj.type === "options"
-          ? {
-              ...accumulator,
-              [attrObj.name]: attrObj.options,
-            }
-          : {
-              ...accumulator,
-              [attrObj.name]: attrObj.value,
-            };
+        if (attrObj.options && attrObj.type === 'options') {
+          return {
+            ...accumulator,
+            [attrObj.name]: attrObj.options,
+          };
+        }
+
+        if (attrObj.keyValueData && attrObj.type === 'keyValueData') {
+          return {
+            ...accumulator,
+            [attrObj.name]: attrObj.keyValueData,
+          };
+        }
+
+        return {
+          ...accumulator,
+          [attrObj.name]: attrObj.value,
+        };
       }, {});
 
       actions.addFormElement({
@@ -59,9 +68,6 @@ export const useFormElements = () => {
         validations: {},
         validationType: formElement.validationType,
         validators: formElement.validators,
-        // type: formElement.type,
-        // initialValue: (attributeInitial && attributeInitial.name) || '',
-        // validationsSchema: formElement.validationSchema,
       });
     },
     [actions, activeGroupId, createName, lastGroupPositionIndex]
@@ -69,7 +75,7 @@ export const useFormElements = () => {
 
   const setFormElementAttributes = React.useCallback(
     (...params: Parameters<typeof actions.setFormElementAttributes>) => {
-      console.log("setting attributes for ", params);
+      console.log('setting attributes for ', params);
       actions.setFormElementAttributes(...params);
     },
     [actions]
@@ -77,7 +83,7 @@ export const useFormElements = () => {
 
   const setFormElementAttribute = React.useCallback(
     (...params: Parameters<typeof actions.setFormElementAttribute>) => {
-      console.log("setting one attribute for ", params);
+      console.log('setting one attribute for ', params);
       actions.setFormElementAttribute(...params);
     },
     [actions]
