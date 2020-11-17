@@ -1,6 +1,7 @@
 import {
+  Box,
+  Button,
   createStyles,
-  Fab,
   Grid,
   makeStyles,
   Paper,
@@ -11,27 +12,17 @@ import React from 'react';
 import { useFieldCreator, useFormElements, useNameGenerator } from '../hooks';
 import { FormStoredElementType } from '../store/store';
 import { Control, useForm } from 'react-hook-form';
-import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     previewContainer: {
+      position: 'relative',
       padding: theme.spacing(2),
-      marginBottom: theme.spacing(2) * 2,
       display: 'flex',
       height: '100%',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    floatingButton: {
-      position: 'absolute',
-      right: theme.spacing(2),
-      bottom: theme.spacing(2),
-      float: 'right',
-    },
-    icon: {
-      marginRight: theme.spacing(1),
     },
   })
 );
@@ -88,15 +79,16 @@ export const AttributesEditor = (props: AttributesEditFieldProps) => {
           </Grid>
         ))}
       </Grid>
-      <Fab
-        variant="extended"
-        color={'secondary'}
-        type={'submit'}
-        className={classes.floatingButton}
+      <Box
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        p={3}
       >
-        <SaveIcon className={classes.icon} />
-        apply
-      </Fab>
+        <Button variant={'contained'} color={'primary'} type={'submit'}>
+          Save Attributes
+        </Button>
+      </Box>
     </form>
   );
 };

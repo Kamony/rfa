@@ -1,31 +1,19 @@
-import {createStyles, Fab, Grid, makeStyles, Theme,} from "@material-ui/core";
-import React from "react";
-import {FormStoredElementType} from "../store/store";
-import {useForm} from "react-hook-form";
-import SaveIcon from "@material-ui/icons/Save";
-import {useFormElements, useValidationCreator} from "../hooks";
-import {validatorsMapper} from "../model";
+import {
+  Box,
+  Button,
+  createStyles,
+  Grid,
+  makeStyles,
+  Theme,
+} from '@material-ui/core';
+import React from 'react';
+import { FormStoredElementType } from '../store/store';
+import { useForm } from 'react-hook-form';
+import { useFormElements, useValidationCreator } from '../hooks';
+import { validatorsMapper } from '../model';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    previewContainer: {
-      padding: theme.spacing(2),
-      marginBottom: theme.spacing(2) * 2,
-      display: "flex",
-      height: "100%",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    floatingButton: {
-      position: "absolute",
-      right: theme.spacing(2),
-      bottom: theme.spacing(2),
-      float: "right",
-    },
-    icon: {
-      marginRight: theme.spacing(1),
-    },
     validator: {
       marginBottom: theme.spacing(2),
     },
@@ -45,31 +33,32 @@ export const ValidationsEditor = (props: AttributesEditFieldProps) => {
   const classes = useStyles();
 
   const handleSave = (data: any) => {
-    console.log({ data });
     handlers.setFormElementValidations(props.element.id, data);
   };
   return (
     <form onSubmit={handleSubmit(handleSave)}>
-      <Grid container direction={"column"} spacing={2}>
-        {props.element.validators?.map((validator) =>
-          React.createElement(validatorsMapper[validator], {
-            key: validator,
-            register,
-            disabledParam: !watcher[validator],
-            name: validator,
-            className: classes.validator,
-          })
-        )}
+      <Grid item container direction={'column'} spacing={2}>
+        {props.element.validators?.map((validator) => (
+          <Grid item key={validator}>
+            {React.createElement(validatorsMapper[validator], {
+              register,
+              disabledParam: !watcher[validator],
+              name: validator,
+              className: classes.validator,
+            })}
+          </Grid>
+        ))}
       </Grid>
-      <Fab
-        variant="extended"
-        color={"secondary"}
-        type={"submit"}
-        className={classes.floatingButton}
+      <Box
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        p={3}
       >
-        <SaveIcon className={classes.icon} />
-        apply
-      </Fab>
+        <Button variant={'contained'} color={'primary'} type={'submit'}>
+          Save Validations
+        </Button>
+      </Box>
     </form>
   );
 };
