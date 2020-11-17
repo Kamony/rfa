@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Collapse,
   Paper,
@@ -6,21 +6,21 @@ import {
   Theme,
   makeStyles,
   createStyles,
-} from "@material-ui/core";
+} from '@material-ui/core';
 // import {  } from "@material-ui/styles";
-import { useIntersectionObserver } from "../useIntersectionObserver";
-import { TreeNodeTitleInput } from "../TreeNodeTitle/TreeNodeTitleInput";
-import { TreeNodeType } from "./TreeNode";
-import { TreeNodeDataInput } from "../TreeNodeData/TreeNodeDataInput";
+import { useIntersectionObserver } from '../../../hooks/use-intersection-observer';
+import { TreeNodeTitleInput } from '../tree-node-title/tree-node-title-input';
+import { TreeNodeType } from './tree-node';
+import { TreeNodeDataInput } from '../tree-node-data/tree-node-data-input';
 import {
   FormContextType,
   FormControlType,
-} from "../../../types/common-form-components-types";
-import { uuid } from "../../../utils/uuid";
-import { useWatch } from "react-hook-form";
-import { NodeTitleAnchor } from "../NodeTitleAnchor";
-import { TreeNodeCornerButton } from "../TreeNodeCornerButton";
-import { useClientRect } from "../useClientRect";
+} from '../../../types/common-form-components-types';
+import { uuid } from '../../../utils/uuid';
+import { useWatch } from 'react-hook-form';
+import { NodeTitleAnchor } from '../node-title-anchor';
+import { TreeNodeCornerButton } from '../tree-node-corner-button';
+import { useClientRect } from '../../../hooks/use-client-rect';
 
 export type TreeNodeInputProps = {
   id: string;
@@ -28,8 +28,8 @@ export type TreeNodeInputProps = {
   isEndingNode?: boolean;
   level?: number;
   allowUserToDefineData?: boolean;
-  data?: TreeNodeType["data"];
-  descendents?: TreeNodeType["descendents"];
+  data?: TreeNodeType['data'];
+  descendents?: TreeNodeType['descendents'];
   nodeLabel?: string;
   required?: boolean;
   onDelete?: (id: string) => void;
@@ -51,7 +51,7 @@ export const TreeNodeInput = ({
   const classes = useStyles();
   const [isOpen, setIsOpen] = React.useState(true);
   const [childNodes, setChildNodes] = React.useState<
-    TreeNodeType["descendents"]
+    TreeNodeType['descendents']
   >();
   const hasDescendents = React.useMemo(
     () => !!(descendents?.length || childNodes?.length),
@@ -75,7 +75,7 @@ export const TreeNodeInput = ({
     if (!nodeElement) {
       return;
     }
-    nodeElement.scrollIntoView({ behavior: "smooth" });
+    nodeElement.scrollIntoView({ behavior: 'smooth' });
   }, [nodeElement]);
 
   const addChildNode = React.useCallback(() => {
@@ -86,7 +86,7 @@ export const TreeNodeInput = ({
       ...(prevState ?? []),
       {
         id: uuid(),
-        label: "",
+        label: '',
       },
     ]);
   }, [isOpen]);
@@ -112,7 +112,7 @@ export const TreeNodeInput = ({
             <div
               className={classes.edgeVer}
               style={{
-                height: !isEndingNode ? "100%" : (nodeRect?.height ?? 2) / 2,
+                height: !isEndingNode ? '100%' : (nodeRect?.height ?? 2) / 2,
               }}
             />
             <div
@@ -126,35 +126,35 @@ export const TreeNodeInput = ({
           title={nameValue}
           onClick={scrollToNode}
         />
-        <Paper variant={"outlined"} className={classes.node} innerRef={nodeRef}>
+        <Paper variant={'outlined'} className={classes.node} innerRef={nodeRef}>
           <TreeNodeTitleInput
             {...textInputProps}
             label={nodeLabel}
             inputRef={formContext.register}
             name={`${formContext.name}.name`}
-            style={{ display: "flex", flex: 1 }}
+            style={{ display: 'flex', flex: 1 }}
           />
 
           <TreeNodeCornerButton
             onClick={addChildNode}
-            icon={"add"}
-            corner={"bottomRight"}
-            color={"action"}
+            icon={'add'}
+            corner={'bottomRight'}
+            color={'action'}
           />
           {onDelete && (
             <TreeNodeCornerButton
               onClick={removeChildNode}
-              icon={"remove"}
-              corner={"topRight"}
-              color={"error"}
+              icon={'remove'}
+              corner={'topRight'}
+              color={'error'}
             />
           )}
           {hasDescendents && (
             <TreeNodeCornerButton
               onClick={toggleDescendents}
-              icon={isOpen ? "expandLess" : "expandMore"}
-              corner={"bottomLeft"}
-              color={"action"}
+              icon={isOpen ? 'expandLess' : 'expandMore'}
+              corner={'bottomLeft'}
+              color={'action'}
             />
           )}
           <div ref={ref} />
@@ -195,7 +195,7 @@ export const TreeNodeInput = ({
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     edgeWrapper: {
-      position: "absolute",
+      position: 'absolute',
       top: 0,
       bottom: 0,
       left: 0,
@@ -204,47 +204,47 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     edgeVer: {
       width: 1,
-      backgroundColor: theme.palette.grey["300"],
+      backgroundColor: theme.palette.grey['300'],
     },
     edgeHor: {
-      position: "absolute",
+      position: 'absolute',
       height: 1,
-      width: "100%",
-      backgroundColor: theme.palette.grey["300"],
+      width: '100%',
+      backgroundColor: theme.palette.grey['300'],
     },
     root: {
-      position: "relative",
+      position: 'relative',
       padding: theme.spacing(2, 0, 2, 5),
       marginTop: theme.spacing(1),
     },
     node: {
-      position: "relative",
+      position: 'relative',
       padding: theme.spacing(2),
-      display: "flex",
-      flexDirection: "column",
-      width: "fit-content",
+      display: 'flex',
+      flexDirection: 'column',
+      width: 'fit-content',
     },
     payloadCaption: {
       marginRight: theme.spacing(1),
       width: theme.spacing(13),
     },
     payloadEntry: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
       borderBottomWidth: 1,
-      borderBottomStyle: "solid",
-      borderBottomColor: theme.palette.grey["200"],
+      borderBottomStyle: 'solid',
+      borderBottomColor: theme.palette.grey['200'],
     },
     removeButton: {
-      position: "absolute",
+      position: 'absolute',
       height: 36,
       width: 36,
       top: -18,
       right: -18,
     },
     addButton: {
-      position: "absolute",
+      position: 'absolute',
       height: 36,
       width: 36,
       bottom: -18,

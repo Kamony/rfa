@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   Collapse,
@@ -6,13 +6,13 @@ import {
   Paper,
   Theme,
   Typography,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { NodeTitleAnchor } from "../NodeTitleAnchor";
-import { useIntersectionObserver } from "../useIntersectionObserver";
-import { TreeExpandButton } from "../TreeExpandButton";
-import { TreeNodeTitle } from "../TreeNodeTitle/TreeNodeTitle";
-import { TreeNodeTitleInput } from "../TreeNodeTitle/TreeNodeTitleInput";
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import { NodeTitleAnchor } from '../node-title-anchor';
+import { useIntersectionObserver } from '../../../hooks/use-intersection-observer';
+import { TreeExpandButton } from '../tree-expand-button';
+import { TreeNodeTitle } from '../tree-node-title/tree-node-title';
+import { TreeNodeTitleInput } from '../tree-node-title/tree-node-title-input';
 
 export type TreeNodePayload = { name: string; value: any }[];
 
@@ -56,7 +56,7 @@ export const TreeNode = ({
       return;
     }
 
-    nodeRef.current.scrollIntoView({ behavior: "smooth" });
+    nodeRef.current.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   const nodeRef = React.useRef<HTMLDivElement>();
@@ -73,7 +73,7 @@ export const TreeNode = ({
               className={classes.edgeVer}
               style={{
                 height: !isEndingNode
-                  ? "100%"
+                  ? '100%'
                   : (nodeRef.current?.offsetHeight ?? 2) / 2,
               }}
             />
@@ -88,7 +88,7 @@ export const TreeNode = ({
           title={node.label}
           onClick={scrollToNode}
         />
-        <Paper variant={"outlined"} className={classes.node} innerRef={nodeRef}>
+        <Paper variant={'outlined'} className={classes.node} innerRef={nodeRef}>
           {/* Node Title */}
           {/*<Typography*/}
           {/*  color={"primary"}*/}
@@ -112,10 +112,10 @@ export const TreeNode = ({
           {node.data?.map((payloadEntry, index) => (
             <Box className={classes.payloadEntry} key={index}>
               <Typography
-                variant={"caption"}
+                variant={'caption'}
                 className={classes.payloadCaption}
               >{`${payloadEntry.name}:`}</Typography>
-              <Typography variant={"body2"}>{payloadEntry.value}</Typography>
+              <Typography variant={'body2'}>{payloadEntry.value}</Typography>
             </Box>
           ))}
           {hasDescendents && (
@@ -143,7 +143,7 @@ export const TreeNode = ({
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     edgeWrapper: {
-      position: "absolute",
+      position: 'absolute',
       top: 0,
       bottom: 0,
       left: theme.spacing(2),
@@ -152,36 +152,36 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     edgeVer: {
       width: 1,
-      backgroundColor: theme.palette.grey["300"],
+      backgroundColor: theme.palette.grey['300'],
     },
     edgeHor: {
-      position: "absolute",
+      position: 'absolute',
       height: 1,
-      width: "100%",
-      backgroundColor: theme.palette.grey["300"],
+      width: '100%',
+      backgroundColor: theme.palette.grey['300'],
     },
     root: {
-      position: "relative",
+      position: 'relative',
       padding: theme.spacing(1, 0, 1, 5),
     },
     node: {
-      position: "relative",
+      position: 'relative',
       padding: theme.spacing(1),
-      display: "flex",
-      flexDirection: "column",
-      width: "fit-content",
+      display: 'flex',
+      flexDirection: 'column',
+      width: 'fit-content',
     },
     payloadCaption: {
       marginRight: theme.spacing(1),
       width: theme.spacing(13),
     },
     payloadEntry: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
       borderBottomWidth: 1,
-      borderBottomStyle: "solid",
-      borderBottomColor: theme.palette.grey["200"],
+      borderBottomStyle: 'solid',
+      borderBottomColor: theme.palette.grey['200'],
     },
   })
 );

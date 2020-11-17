@@ -1,7 +1,7 @@
-import { useStore } from "../store/store";
-import React from "react";
-import { useNameGenerator } from "./useNameGenerator";
-import { useFormElements } from "./useFormElements";
+import { useStore } from '../store/store';
+import React from 'react';
+import { useNameGenerator } from './use-name-generator';
+import { useFormElements } from './use-form-elements';
 
 export const useFormElementActions = (formElementId: string) => {
   const [, actions] = useStore(

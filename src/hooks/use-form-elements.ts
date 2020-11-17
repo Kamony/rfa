@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../store/store';
-import { useNameGenerator } from './useNameGenerator';
+import { useNameGenerator } from './use-name-generator';
 import { FormElement } from '../model';
 import { uuid } from '../utils/uuid';
 

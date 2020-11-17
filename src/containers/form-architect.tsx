@@ -29,10 +29,10 @@ import {
   Switch,
   TextInput,
 } from '../components/form-components';
-import { useRfaDataConverter } from '../hooks/useRfaDataConverter';
+import { useRfaDataConverter } from '../hooks/use-rfa-data-converter';
 import type { FormElement } from '../model';
-import { FormArchitectSaveButton } from '../components/FormArchitectSaveButton';
-import { TreeBuilder } from '../components/tree/TreeBuilder';
+import { FormArchitectSaveButton } from '../components/form-architect-save-button';
+import { TreeBuilder } from '../components/form-components/tree-builder';
 
 type FormArchitectProps = {
   onSave: (formData: FormSchemaType) => void;

@@ -13,7 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import type { FieldValues } from 'react-hook-form';
 import type { FormSchemaType } from '../store/store';
-import { useFormRenderer } from '../hooks/useFormRenderer';
+import { useFormRenderer } from '../hooks/use-form-renderer';
 
 type Props = {
   data: FormSchemaType;

@@ -1,16 +1,16 @@
 import React from 'react';
-import { TreeNode, TreeNodeType } from './TreeNode/TreeNode';
+import { TreeNode, TreeNodeType } from './tree-node/tree-node';
 
 // type NodePayload = { name: string; value: any }[];
 //
-// type TreeNode = {
+// type tree-node = {
 //   id: string;
 //   label: string;
-//   descendents?: TreeNode[];
+//   descendents?: tree-node[];
 //   data?: NodePayload;
 // };
 
-// const Node: TreeNode = {
+// const Node: tree-node = {
 //   id: "koren",
 //   label: "koren koren koren koren",
 //   data: [

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Box,
   Button,
@@ -11,15 +11,15 @@ import {
   Theme,
   Tooltip,
   Typography,
-} from "@material-ui/core";
-import { Clear, DragIndicatorOutlined } from "@material-ui/icons";
-import { SortableWrapper } from "../../containers";
-import { useFieldArray } from "react-hook-form";
+} from '@material-ui/core';
+import { Clear, DragIndicatorOutlined } from '@material-ui/icons';
+import { SortableWrapper } from '../../containers';
+import { useFieldArray } from 'react-hook-form';
 import {
   FormContextType,
   FormControlType,
-} from "../../types/common-form-components-types";
-import { HelperTooltip } from "./HelperTooltip";
+} from '../../types/common-form-components-types';
+import { HelperTooltip } from '../helper-tooltip';
 
 export const TreeNodeDataBuilder = (
   props: FormControlType & FormContextType
@@ -34,41 +34,41 @@ export const TreeNodeDataBuilder = (
       <Grid
         container
         spacing={1}
-        direction={"column"}
+        direction={'column'}
         className={classes.wrapper}
       >
-        <Typography color={"textSecondary"} variant={"subtitle2"}>
+        <Typography color={'textSecondary'} variant={'subtitle2'}>
           Node data
         </Typography>
 
         <Grid
           item
           container
-          direction={"row"}
-          alignItems={"center"}
-          justify={"center"}
+          direction={'row'}
+          alignItems={'center'}
+          justify={'center'}
           spacing={2}
           className={classes.container}
         >
           {/*<div className={classes.dragContainer} />*/}
           <div style={{ width: 26 }} />
           <Grid item xs={4}>
-            <Typography variant={"caption"} color={"primary"}>
+            <Typography variant={'caption'} color={'primary'}>
               title
             </Typography>
           </Grid>
           <Grid item xs={3}>
-            <Typography variant={"caption"} color={"primary"}>
+            <Typography variant={'caption'} color={'primary'}>
               input placeholder
             </Typography>
           </Grid>
           <Grid item xs={3}>
-            <Typography variant={"caption"} color={"primary"}>
+            <Typography variant={'caption'} color={'primary'}>
               input value
             </Typography>
             <HelperTooltip
               text={
-                "When filled, user cannot edit this field, use for constants"
+                'When filled, user cannot edit this field, use for constants'
               }
             />
           </Grid>
@@ -80,20 +80,20 @@ export const TreeNodeDataBuilder = (
             id={item.id!}
             index={index}
             swap={swap}
-            dndIndicator={"optionItemSortable"}
+            dndIndicator={'optionItemSortable'}
             key={item.id}
           >
             <Grid
               item
               container
-              direction={"row"}
-              alignItems={"center"}
-              justify={"center"}
+              direction={'row'}
+              alignItems={'center'}
+              justify={'center'}
               spacing={2}
               className={classes.container}
             >
               <div className={classes.dragContainer}>
-                <DragIndicatorOutlined color={"action"} />
+                <DragIndicatorOutlined color={'action'} />
               </div>
               <Grid item xs={4}>
                 <Input
@@ -106,7 +106,7 @@ export const TreeNodeDataBuilder = (
                   inputRef={props.register()}
                   defaultValue={item.name}
                   name={`${props.name}[${index}].name`}
-                  endAdornment={":"}
+                  endAdornment={':'}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -145,9 +145,9 @@ export const TreeNodeDataBuilder = (
                   <IconButton
                     aria-label="delete"
                     onClick={() => remove(index)}
-                    size={"small"}
+                    size={'small'}
                   >
-                    <Clear color={"error"} fontSize={"small"} />
+                    <Clear color={'error'} fontSize={'small'} />
                   </IconButton>
                 </Tooltip>
               </Grid>
@@ -157,9 +157,9 @@ export const TreeNodeDataBuilder = (
 
         <Box p={2} className={classes.actionArea}>
           <Button
-            color={"primary"}
-            variant={"outlined"}
-            onClick={() => append({ name: "" })}
+            color={'primary'}
+            variant={'outlined'}
+            onClick={() => append({ name: '' })}
           >
             Add
           </Button>
@@ -172,32 +172,32 @@ export const TreeNodeDataBuilder = (
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      width: "100%",
-      flexWrap: "nowrap",
-      "&:hover $dragContainer": {
-        visibility: "visible",
+      width: '100%',
+      flexWrap: 'nowrap',
+      '&:hover $dragContainer': {
+        visibility: 'visible',
       },
     },
     dragContainer: {
-      visibility: "hidden",
-      cursor: "move",
-      position: "relative",
-      display: "flex",
-      alignItems: "center",
-      height: "100%",
+      visibility: 'hidden',
+      cursor: 'move',
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      height: '100%',
       left: theme.spacing(0.5),
     },
     wrapper: {
       borderWidth: 1,
-      borderStyle: "solid",
+      borderStyle: 'solid',
       borderColor: theme.palette.grey.A100,
       borderRadius: theme.shape.borderRadius,
       padding: theme.spacing(2),
     },
     actionArea: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     actionDivider: {
       paddingLeft: theme.spacing(1),

@@ -1,7 +1,7 @@
 import { useComponentStore } from '../store/componentStore';
 import React from 'react';
 import type { FormSchemaType } from '../store/store';
-import type { ExportedSchemaType } from './useDataExporter';
+import type { ExportedSchemaType } from './use-data-exporter';
 
 export const useRfaDataConverter = () => {
   const [components, addComponents] = useComponentStore(

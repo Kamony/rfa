@@ -1,8 +1,8 @@
-import React from "react";
-import * as yup from "yup";
-import { Validation, ValidationType } from "../model";
-import { useFormElements } from "./useFormElements";
-import { FormStoredElementType } from "../store/store";
+import React from 'react';
+import * as yup from 'yup';
+import { Validation, ValidationType } from '../model';
+import { useFormElements } from './use-form-elements';
+import { FormStoredElementType } from '../store/store';
 
 export const useValidationCreator = () => {
   const { allElements } = useFormElements();
@@ -10,7 +10,7 @@ export const useValidationCreator = () => {
   const ElementsValidations = React.useMemo(
     () =>
       allElements
-        .filter((el) => JSON.stringify(el.validations) !== "{}")
+        .filter((el) => JSON.stringify(el.validations) !== '{}')
         .reduce(
           (acc, el) => ({
             ...acc,
@@ -35,16 +35,16 @@ export const useValidationCreator = () => {
 };
 
 export const getMappedValidations = (
-  values: FormStoredElementType["validations"]
+  values: FormStoredElementType['validations']
 ): Validation[] => {
   let validations: Validation[] = [];
   Object.entries(values).forEach(([key, value]: [any, any]) => {
     if (!value) {
       return;
     }
-    if (!key.includes("ErrorMessage")) {
+    if (!key.includes('ErrorMessage')) {
       let validation: Validation;
-      if (key === "type") {
+      if (key === 'type') {
         validation = {
           type: values[key],
           params: [values[`${key}ErrorMessage`]],
@@ -54,12 +54,12 @@ export const getMappedValidations = (
           type: key,
           params: [values[`${key}ErrorMessage`]],
         };
-        if (value && typeof value !== "boolean") {
+        if (value && typeof value !== 'boolean') {
           validation.params.unshift(value);
         }
       }
 
-      if (!(typeof value === "boolean" && !value)) {
+      if (!(typeof value === 'boolean' && !value)) {
         validations.push(validation);
       }
     }
@@ -80,8 +80,8 @@ export const createValidationFieldSchema = (
     fieldSchema = fieldSchema[type](...params);
   });
 
-  if (validationType === "number") {
-    fieldSchema = fieldSchema["transform"](emptyStringToNull);
+  if (validationType === 'number') {
+    fieldSchema = fieldSchema['transform'](emptyStringToNull);
   }
 
   return fieldSchema;
@@ -90,7 +90,7 @@ export const createValidationFieldSchema = (
 // helper for yup transform function
 function emptyStringToNull(value: any, originalValue: any) {
   console.log({ value, originalValue });
-  if (typeof originalValue === "string" && originalValue === "") {
+  if (typeof originalValue === 'string' && originalValue === '') {
     return null;
   }
   return value;

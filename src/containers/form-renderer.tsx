@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, CssBaseline, ThemeProvider } from '@material-ui/core';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import { useRfaDataConverter } from '../hooks/useRfaDataConverter';
+import { useRfaDataConverter } from '../hooks/use-rfa-data-converter';
 import { FormRendererForm } from './form-renderer-form';
 
 import type { FieldValues } from 'react-hook-form';
 import type { Theme, ThemeOptions } from '@material-ui/core';
-import type { ExportedSchemaType } from '../hooks/useDataExporter';
+import type { ExportedSchemaType } from '../hooks/use-data-exporter';
 import type { FormSchemaType } from '../store/store';
 
 type FormRendererProps = {

@@ -1,7 +1,7 @@
-import { ToggleButton } from "./ToggleButton";
-import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import { createStyles } from "@material-ui/core";
+import { ToggleButton } from './toggle-button';
+import React from 'react';
+import { makeStyles } from '@material-ui/styles';
+import { createStyles } from '@material-ui/core';
 
 type Props = {
   isOpen: boolean;
@@ -12,7 +12,7 @@ export const TreeExpandButton = (props: Props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <ToggleButton {...props} className={classes.button} color={"secondary"} />
+      <ToggleButton {...props} className={classes.button} color={'secondary'} />
     </div>
   );
 };
@@ -20,14 +20,14 @@ export const TreeExpandButton = (props: Props) => {
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      position: "absolute",
+      position: 'absolute',
       bottom: 0,
       left: 0,
     },
     button: {
       height: 42,
       width: 42,
-      position: "relative",
+      position: 'relative',
       left: -21,
       top: 21,
     },

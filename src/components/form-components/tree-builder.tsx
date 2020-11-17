@@ -1,5 +1,8 @@
 import React from 'react';
-import { TreeNodeInput, TreeNodeInputProps } from './TreeNode/TreeNodeInput';
+import {
+  TreeNodeInput,
+  TreeNodeInputProps,
+} from '../tree/tree-node/tree-node-input';
 import {
   FormContextType,
   FormControlType,
