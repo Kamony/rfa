@@ -79,7 +79,7 @@ export const TreeNode = ({ node, isEndingNode = false, level = 1 }: Props) => {
         )}
         <NodeTitleAnchor
           visible={!!(isSticky && hasDescendents && isOpen)}
-          title={node.name}
+          title={node.name ?? `Node level ${level}`}
           onClick={scrollToNode}
         />
         <Paper variant={'outlined'} className={classes.node} innerRef={nodeRef}>
@@ -121,7 +121,7 @@ export const TreeNode = ({ node, isEndingNode = false, level = 1 }: Props) => {
             <TreeNode
               key={index}
               node={descendant}
-              level={++level}
+              level={level + 1}
               isEndingNode={node.descendents?.length === index + 1}
             />
           ))}

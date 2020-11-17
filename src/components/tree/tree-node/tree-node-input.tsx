@@ -24,7 +24,6 @@ export type TreeNodeInputPayload = { name: string; value: any }[];
 
 export type TreeNodeInputType = {
   id: string;
-  label: string;
   descendents?: TreeNodeInputType[];
   data?: TreeNodeInputPayload;
 };
@@ -57,6 +56,7 @@ export const TreeNodeInput = ({
   const [childNodes, setChildNodes] = React.useState<
     TreeNodeInputType['descendents']
   >();
+  console.log({ id, descendents, nodeLabel });
   const hasDescendents = React.useMemo(
     () => !!(descendents?.length || childNodes?.length),
     [childNodes, descendents]
@@ -90,7 +90,6 @@ export const TreeNodeInput = ({
       ...(prevState ?? []),
       {
         id: uuid(),
-        label: '',
       },
     ]);
   }, [isOpen]);
@@ -174,6 +173,7 @@ export const TreeNodeInput = ({
         <Collapse in={isOpen}>
           {childNodes?.map((descendant, index) => (
             <TreeNodeInput
+              key={descendant.id}
               id={descendant.id}
               formContext={{
                 register: formContext.register,
@@ -182,11 +182,11 @@ export const TreeNodeInput = ({
               }}
               data={data}
               descendents={descendant.descendents}
-              level={++level}
-              key={descendant.id}
+              level={level + 1}
               isEndingNode={childNodes?.length === index + 1}
               onDelete={onChildRemove}
               allowUserToDefineData={allowUserToDefineData}
+              nodeLabel={nodeLabel}
               {...textInputProps}
             />
           ))}
