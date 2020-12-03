@@ -15,9 +15,12 @@ export const useNameGenerator = () => {
   );
 
   const createName = React.useCallback(
-    (label: string) => {
+    (label: string, prefix?: string) => {
       const cleanName = label.trim().replace(/\s+/g, '_').toLowerCase();
-      return isUniqueName(cleanName) ? cleanName : `${cleanName}-${uuid()}`;
+      const uniqueName = isUniqueName(cleanName)
+        ? cleanName
+        : `${cleanName}-${uuid()}`;
+      return prefix ? `${prefix}-${uniqueName}` : uniqueName;
     },
     [isUniqueName]
   );

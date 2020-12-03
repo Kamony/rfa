@@ -75,7 +75,6 @@ export const useFormElements = () => {
 
   const setFormElementAttributes = React.useCallback(
     (...params: Parameters<typeof actions.setFormElementAttributes>) => {
-      console.log('setting attributes for ', params);
       actions.setFormElementAttributes(...params);
     },
     [actions]
@@ -83,7 +82,6 @@ export const useFormElements = () => {
 
   const setFormElementAttribute = React.useCallback(
     (...params: Parameters<typeof actions.setFormElementAttribute>) => {
-      console.log('setting one attribute for ', params);
       actions.setFormElementAttribute(...params);
     },
     [actions]

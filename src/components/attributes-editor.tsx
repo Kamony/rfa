@@ -53,8 +53,22 @@ export const AttributesEditor = (props: AttributesEditFieldProps) => {
 
   const handleSave = (data: any) => {
     delete data[props.element.name];
-    data.label !== props.element.attributes.label &&
-      setFormElementAttribute(props.element.id, 'name', createName(data.label));
+    if (data.label !== props.element.attributes.label) {
+      //there has been name change
+      if (props.element.name.toLowerCase() === 'tree') {
+        setFormElementAttribute(
+          props.element.id,
+          'name',
+          createName(data.label, 'tree')
+        );
+      } else {
+        setFormElementAttribute(
+          props.element.id,
+          'name',
+          createName(data.label)
+        );
+      }
+    }
     setFormElementAttributes(props.element.id, data);
   };
   return (

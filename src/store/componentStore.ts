@@ -10,6 +10,7 @@ import {
   Switch,
   TextInput,
 } from '../components/form-components';
+import { TreeBuilder } from '../components/form-components/tree-builder';
 
 type State = {
   components: React.FC<any>[];
@@ -28,6 +29,7 @@ export const initialState: State = {
     SelectMulti,
     Switch,
     Slider,
+    TreeBuilder,
   ],
 };
 
