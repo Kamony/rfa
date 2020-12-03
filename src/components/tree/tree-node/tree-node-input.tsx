@@ -56,7 +56,6 @@ export const TreeNodeInput = ({
   const [childNodes, setChildNodes] = React.useState<
     TreeNodeInputType['descendents']
   >();
-  console.log({ id, descendents, nodeLabel });
   const hasDescendents = React.useMemo(
     () => !!(descendents?.length || childNodes?.length),
     [childNodes, descendents]
