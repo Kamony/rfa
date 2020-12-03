@@ -314,6 +314,7 @@ export const FormArchitect = (props: FormArchitectProps) => {
       {
         name: 'root',
         label: 'Tree',
+        description: 'for structured data',
         icon: <TreeIcon color={'secondary'} />,
         render: TreeBuilder,
         validationType: 'object',
