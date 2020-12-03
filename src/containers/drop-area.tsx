@@ -41,6 +41,7 @@ function TabPanel(props: TabPanelProps) {
 
 const useStyles = makeStyles({
   root: {
+    position: 'relative',
     display: 'flex',
     flex: '1 1 0',
     alignItems: 'center',
@@ -178,7 +179,6 @@ export const DropArea = () => {
             </Tabs>
           </AppBar>
         )}
-        {/*todo: do dropIndication*/}
         {dropIndicationActive && <DropIndicator />}
         {groupings.groups.map((group) => (
           <TabPanel

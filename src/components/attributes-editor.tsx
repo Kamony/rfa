@@ -9,20 +9,27 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { useFieldCreator, useFormElements, useNameGenerator } from '../hooks';
+import {
+  useFieldCreator,
+  useFormElements,
+  useNameGenerator,
+  useRetractableString,
+} from '../hooks';
 import { FormStoredElementType } from '../store/store';
 import { Control, useForm } from 'react-hook-form';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     previewContainer: {
-      position: 'relative',
       padding: theme.spacing(2),
       display: 'flex',
       height: '100%',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    attributes: {
+      paddingTop: theme.spacing(3),
     },
   })
 );
@@ -49,9 +56,14 @@ export const AttributesEditor = (props: AttributesEditFieldProps) => {
     setFormElementAttributes,
     setFormElementAttribute,
   } = useFormElements();
+  const { text, retractString } = useRetractableString(
+    'Save Attributes',
+    'Saved!'
+  );
   const classes = useStyles();
 
   const handleSave = (data: any) => {
+    retractString();
     delete data[props.element.name];
     if (data.label !== props.element.attributes.label) {
       //there has been name change
@@ -73,12 +85,8 @@ export const AttributesEditor = (props: AttributesEditFieldProps) => {
   };
   return (
     <form onSubmit={handleSubmit(handleSave)}>
-      <Paper
-        className={classes.previewContainer}
-        color={'grey'}
-        variant={'outlined'}
-      >
-        <Typography color={'textPrimary'}>Preview</Typography>
+      <Paper className={classes.previewContainer} elevation={5}>
+        <Typography color={'secondary'}>Preview</Typography>
         {React.createElement(props.element.render, {
           ...props.element.attributes,
           ...{ register, unregister, control, setValue, reset },
@@ -86,7 +94,13 @@ export const AttributesEditor = (props: AttributesEditFieldProps) => {
           name: props.element.name,
         })}
       </Paper>
-      <Grid item container direction={'column'} spacing={2}>
+      <Grid
+        item
+        container
+        direction={'column'}
+        spacing={4}
+        className={classes.attributes}
+      >
         {props.element.attributeSchema.map((attr) => (
           <Grid item key={attr.name}>
             {getAttributeEditField(attr, { register }, control as Control)}
@@ -100,7 +114,7 @@ export const AttributesEditor = (props: AttributesEditFieldProps) => {
         p={3}
       >
         <Button variant={'contained'} color={'primary'} type={'submit'}>
-          Save Attributes
+          {text}
         </Button>
       </Box>
     </form>
