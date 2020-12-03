@@ -14,7 +14,7 @@ import { FormElementsContainer } from './form-elements-container';
 import { useDialog, useFormElements, useGrouping } from '../hooks';
 import { FormElement } from '../model';
 import { ConfirmationDialog, CustomDialog } from '../components/dialogs';
-import { DraggableTag } from '../components';
+import { DraggableTag, DropIndicator } from '../components';
 import { RfaSchemaTransferer } from './rfa-schema-transferer';
 
 interface TabPanelProps {
@@ -66,7 +66,7 @@ const useStyles = makeStyles({
 
 export const DropArea = () => {
   const [customizedGroupName, setCustomizedGroupName] = React.useState('');
-
+  const [dropIndicationActive, setDropIndicationActive] = React.useState(false);
   const classes = useStyles();
   const {
     groupings,
@@ -86,6 +86,9 @@ export const DropArea = () => {
     accept: 'draggable-field',
     drop: (dropItem) => {
       createFormElement((dropItem as unknown) as FormElement);
+    },
+    collect: (monitor) => {
+      setDropIndicationActive(monitor.canDrop());
     },
   });
 
@@ -176,7 +179,7 @@ export const DropArea = () => {
           </AppBar>
         )}
         {/*todo: do dropIndication*/}
-        {/*{dropIndicationActive && <DropIndicator />}*/}
+        {dropIndicationActive && <DropIndicator />}
         {groupings.groups.map((group) => (
           <TabPanel
             key={group.id}
