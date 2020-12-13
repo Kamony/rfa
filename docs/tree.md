@@ -34,5 +34,11 @@ for displaying a tree
 
 ![Tree Traversal](../assets/images/tree-traversal.gif){:class="img-responsive"}
 
+# Search and Select
+You can search for particular node inside of the [Tree](components#Tree) and select the node for further processing.
+When searching, query can be compared witch node label or node content or both. Partial results can be set.
+
+
 Check out [Components](../components) to learn more about API
 {: style="font-size: 120%; text-align: center; margin-top: 100px"}
+

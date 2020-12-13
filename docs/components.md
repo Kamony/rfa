@@ -122,6 +122,8 @@ const App = () => {
 type TreeProps = {
   node: TreeNodeType;
   theme?: ThemeOptions;
+  searchable?: boolean;
+  onNodeSelect?: (node: TreeNodeType) => void;
 };
 ~~~
 
@@ -129,6 +131,8 @@ type TreeProps = {
 |:--------|:-------:|--------:| --------:|
 | node   | [TreeNodeType](#treenodetype) | true | Schema to render tree with |
 | theme   | ThemeOptions   | false   | Adjusts styles. Refer to [Material UI theming](https://material-ui.com/customization/default-theme/).|
+| searchable   | boolean   | false   | Allow searching in tree. Search bar will appear.|
+| onNodeSelect   | (node: [TreeNodeType](#treenodetype)) => void   | false   | When defined, select action button will appear inside of each node. Function will be called when pressed and corresponding node will be passed as function param.|
 |=====
 
 ## Common Types
