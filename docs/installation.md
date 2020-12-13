@@ -42,6 +42,21 @@ const App = () => {
 };
 ~~~
 
+# Run local example
+first bundle or run library code. From within `root` run:
+~~~ bash
+yarn start 
+~~~
+or
+~~~ bash
+yarn prepare
+~~~
+then run example environment.
+~~~ bash
+cd example/ && yarn start 
+~~~
+localhost will run on port `:1234`
+
 
 Check out [Components](../components)
 {: style="font-size: 120%; text-align: center; margin-top: 100px"}
