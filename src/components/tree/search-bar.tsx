@@ -9,7 +9,6 @@ import Popper from '@material-ui/core/Popper';
 import {
   Box,
   Checkbox,
-  ClickAwayListener,
   Divider,
   FormControl,
   FormControlLabel,
