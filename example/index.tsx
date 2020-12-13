@@ -32,12 +32,27 @@ const myTheme = {
 const App = () => {
   const [formData, setFormData] = React.useState<FormSchemaType>();
   const [submitData, setSubmitData] = React.useState<any>();
+  const [tree, setTree] = React.useState<any>();
 
   const handleOnFormSave = (formData: FormSchemaType) => {
     console.log(formData);
     setFormData(formData);
   };
 
+  const handleFormSubmit = (data) => {
+    console.log(data);
+    setTree(null);
+    setSubmitData(data);
+    const treeData: any = [];
+    Object.entries(data).forEach(([key, value]) => {
+      if (key.includes('tree')) {
+        treeData.push(value);
+      }
+    });
+    setTree(treeData);
+  };
+
+  console.log({ tree, submitData });
   const TreeData = React.useMemo(() => {
     if (!submitData) {
       return;
@@ -60,14 +75,21 @@ const App = () => {
         <div style={{ paddingTop: 50 }}>
           <h1>FormRenderer</h1>
           {formData && (
-            <FormRenderer onSubmit={setSubmitData} data={formData} />
+            <FormRenderer onSubmit={handleFormSubmit} data={formData} />
           )}
         </div>
         <div style={{ paddingTop: 50 }}>
           <h1>Tree</h1>
-          {TreeData &&
-            TreeData.length &&
-            TreeData.map((node, i) => <Tree node={node} key={i} />)}
+          {tree &&
+            tree.length &&
+            tree.map((node, i) => (
+              <Tree
+                node={node}
+                key={i}
+                searchable={true}
+                onNodeSelect={(data) => console.log(data)}
+              />
+            ))}
         </div>
       </div>
     </div>

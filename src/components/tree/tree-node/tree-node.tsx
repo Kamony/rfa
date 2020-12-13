@@ -3,6 +3,7 @@ import {
   Box,
   Collapse,
   createStyles,
+  IconButton,
   Paper,
   Theme,
   Typography,
@@ -14,6 +15,7 @@ import { useClientRect } from '../../../hooks/use-client-rect';
 import { NodeTitleAnchor } from '../node-title-anchor';
 import { TreeNodeTitle } from '../tree-node-title/tree-node-title';
 import { TreeNodeCornerButton } from '../tree-node-corner-button';
+import { ArrowForward } from '@material-ui/icons';
 
 export type TreeNodePayload = { [key: string]: string };
 
@@ -29,12 +31,21 @@ type Props = {
   isEndingNode?: boolean;
   level?: number;
 
+  isCollapsed?: boolean;
+  onSelect?: (data: TreeNodeType) => void;
+
   children?: never;
 };
 
-export const TreeNode = ({ node, isEndingNode = false, level = 1 }: Props) => {
+export const TreeNode = ({
+  node,
+  isEndingNode = false,
+  level = 1,
+  isCollapsed = false,
+  onSelect,
+}: Props) => {
   const classes = useStyles();
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(!isCollapsed);
 
   const { ref, isSticky } = useIntersectionObserver();
   const [nodeRect, nodeRef, nodeElement] = useClientRect();
@@ -48,12 +59,17 @@ export const TreeNode = ({ node, isEndingNode = false, level = 1 }: Props) => {
     }
     setIsOpen((prevState) => !prevState);
   }, [hasDescendents]);
+
   const scrollToNode = React.useCallback(() => {
     if (!nodeElement) {
       return;
     }
     nodeElement.scrollIntoView({ behavior: 'smooth' });
   }, [nodeElement]);
+
+  const handleSelect = React.useCallback(() => {
+    onSelect?.(node);
+  }, [node, onSelect]);
 
   return (
     <>
@@ -83,37 +99,60 @@ export const TreeNode = ({ node, isEndingNode = false, level = 1 }: Props) => {
           onClick={scrollToNode}
         />
         <Paper variant={'outlined'} className={classes.node} innerRef={nodeRef}>
-          <TreeNodeTitle label={node.name} gutterBottom={!!node.data} />
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            alignItems={'flex-start'}
+            justifyContent={'center'}
+          >
+            <TreeNodeTitle label={node.name} gutterBottom={!!node.data} />
 
-          {hasDescendents && (
-            <TreeNodeCornerButton
-              onClick={toggleDescendents}
-              icon={isOpen ? 'expandLess' : 'expandMore'}
-              corner={'bottomLeft'}
-              color={'action'}
-            />
-          )}
-          <div ref={ref} />
-          {/* Node Content */}
-          {node.data &&
-            Object.entries(node.data).map(([name, value], index) => (
+            {hasDescendents && (
+              <TreeNodeCornerButton
+                onClick={toggleDescendents}
+                icon={isOpen ? 'expandLess' : 'expandMore'}
+                corner={'bottomLeft'}
+                color={'action'}
+              />
+            )}
+            <div ref={ref} />
+            {/* Node Content */}
+            {node.data &&
+              Object.entries(node.data).map(([name, value], index) => (
+                <Box className={classes.payloadEntry} key={index}>
+                  <Typography
+                    variant={'caption'}
+                    className={classes.payloadCaption}
+                  >{`${name}:`}</Typography>
+                  <Typography variant={'body2'}>{value}</Typography>
+                </Box>
+              ))}
+            {node.userData?.map((dataEntry, index) => (
               <Box className={classes.payloadEntry} key={index}>
                 <Typography
                   variant={'caption'}
                   className={classes.payloadCaption}
-                >{`${name}:`}</Typography>
-                <Typography variant={'body2'}>{value}</Typography>
+                >{`${dataEntry.name}:`}</Typography>
+                <Typography variant={'body2'}>{dataEntry.value}</Typography>
               </Box>
             ))}
-          {node.userData?.map((dataEntry, index) => (
-            <Box className={classes.payloadEntry} key={index}>
-              <Typography
-                variant={'caption'}
-                className={classes.payloadCaption}
-              >{`${dataEntry.name}:`}</Typography>
-              <Typography variant={'body2'}>{dataEntry.value}</Typography>
+          </Box>
+          {onSelect && (
+            <Box
+              display={'flex'}
+              alignItems={'center'}
+              justifyContent={'center'}
+              pl={4}
+            >
+              <IconButton
+                color="default"
+                aria-label="select data"
+                onClick={handleSelect}
+              >
+                <ArrowForward />
+              </IconButton>
             </Box>
-          ))}
+          )}
         </Paper>
         {/* Node Descendents */}
         <Collapse in={isOpen}>
@@ -123,6 +162,8 @@ export const TreeNode = ({ node, isEndingNode = false, level = 1 }: Props) => {
               node={descendant}
               level={level + 1}
               isEndingNode={node.descendents?.length === index + 1}
+              onSelect={onSelect}
+              isCollapsed={isCollapsed}
             />
           ))}
         </Collapse>
@@ -159,7 +200,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'relative',
       padding: theme.spacing(2),
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'row',
       width: 'fit-content',
     },
     payloadCaption: {
